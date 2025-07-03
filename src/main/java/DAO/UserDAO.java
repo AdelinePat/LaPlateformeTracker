@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {
-    public static Connexion databaseOpenConnexion() {
-        return new Connexion();
-    }
+//    public static Connexion databaseOpenConnexion() {
+//        return new Connexion();
+//    }
 
     public static void databaseCloseConnexion() {
     }
