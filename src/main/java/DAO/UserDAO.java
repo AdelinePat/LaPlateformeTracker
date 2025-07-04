@@ -32,6 +32,13 @@ public class UserDAO {
                 e.printStackTrace();
             }
         }
+      
+    public static Connexion databaseOpenConnexion() {
+        return new Connexion();
+    }
+
+    public static void databaseCloseConnexion() {
+      
     }
 
     public static void createUser(List<String> userRequest) {
