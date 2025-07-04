@@ -16,11 +16,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage mainPage) throws Exception {
-        Parent main_page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/org/example/Main_page.fxml")));
+        Parent main_page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main_page.fxml")));
         mainPage.setTitle("Plateforme Monitors");
         mainPage.setScene(new Scene(main_page, 800, 640));
 
-        MainPageController mainPageController = new MainPageController(mainPage.getScene());
+        MainPageController mainPageController = new MainPageController();
+        mainPageController.setScene(mainPage.getScene());
 
         mainPage.show();
     }

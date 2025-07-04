@@ -7,7 +7,12 @@ import javafx.scene.control.TextField;
 
 public class MainPageController {
 
+    @FXML
     private Scene mainPage;
+
+    public void setScene(Scene mainPage) {
+        this.mainPage = mainPage;
+    }
 
 //    @FXML
 //    private Button logoutbutton;
@@ -26,9 +31,9 @@ public class MainPageController {
 //        gradefilterbutton = (Button) main_page.lookup("#gradeFilterButton");
 //    }
 
-    public MainPageController(Scene mainPage) {
-        this.mainPage = mainPage;
-    }
+//    public MainPageController(Scene mainPage) {
+//        this.mainPage = mainPage;
+//    }
 
     @FXML
     public void onLogoutButtonClicked(javafx.event.ActionEvent actionEvent) {
