@@ -7,11 +7,20 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DatabaseConnection {
-    private static final Dotenv dotenv = Dotenv.load();
-    private static final String URL = dotenv.get("URL");
-    private static final String USER = dotenv.get("USER");
-    private static final String PASSWORD = dotenv.get("PASSWORD");
+    private static final Dotenv dotenv;
+    private static final String URL;
+    private static final String USER;
+    private static final String PASSWORD;
+    public static final String DASHBOARD_PATH;
     private static Connection connection = null;
+
+    static {
+        dotenv = Dotenv.load();
+        URL = dotenv.get("URL");
+        USER = dotenv.get("USER");
+        PASSWORD = dotenv.get("PASSWORD");
+        DASHBOARD_PATH = dotenv.get("DASHBOARD_PATH");
+    }
 
     public static Connection databaseOpenConnexion() throws SQLException {
         if (connection == null || connection.isClosed()) {
