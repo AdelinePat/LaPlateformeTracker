@@ -1,6 +1,6 @@
 package Utils;
 
-public class ConnexionUtils {
+public class ConnectionUtils {
     public static boolean isRegexPasswordValid(String password) {
         return true;
     }
