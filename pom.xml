@@ -4,9 +4,9 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.example</groupId>
-    <artifactId>test</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <groupId>AdeFloJo.plateformeTracker</groupId>
+    <artifactId>PlateformeTracker</artifactId>
+    <version>0.1</version>
 
     <properties>
         <maven.compiler.source>24</maven.compiler.source>
@@ -25,12 +25,22 @@
             <artifactId>javafx-fxml</artifactId>
             <version>24.0.1</version>
         </dependency>
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.7</version>
+        </dependency>
+        <dependency>
+            <groupId>io.github.cdimascio</groupId>
+            <artifactId>java-dotenv</artifactId>
+            <version>5.2.2</version>
+        </dependency>
     </dependencies>
 
     <build>
         <resources>
             <resource>
-                <directory>/src/main/resources</directory>
+                <directory>src/main/resources</directory>
                 <includes>
                     <include>**/*.fxml</include>
                 </includes>
