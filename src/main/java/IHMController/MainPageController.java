@@ -1,18 +1,25 @@
 package IHMController;
 
+import SearchFilter.FirstnameFilter;
+import SearchFilter.ISearchFilter;
+import Utils.DatabaseConnection;
+import Utils.StudentObject;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
+import java.sql.SQLException;
+import java.util.List;
+
 public class MainPageController {
 
-    @FXML
-    private Scene mainPage;
-
-    public void setScene(Scene mainPage) {
-        this.mainPage = mainPage;
-    }
+//    @FXML
+//    private Scene mainPage;
+//
+//    public void setScene(Scene mainPage) {
+//        this.mainPage = mainPage;
+//    }
 
 //    @FXML
 //    private Button logoutbutton;
@@ -37,25 +44,28 @@ public class MainPageController {
 
     @FXML
     public void onLogoutButtonClicked(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton déconnexion cliqué");
+        ISearchFilter filter = new FirstnameFilter();
+        List< StudentObject> aList = filter.filterRequest();
     }
 
-    @FXML
-    public void onNameFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
-        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterNameField");
-    }
-
-    @FXML
-    public void onFirstNameFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
-        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterFirstNameField");
-    }
-
-    @FXML
-    public void onAgeFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
-        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterAgeField");
-    }
-
-    @FXML
-    public void onGradeFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
-        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterGradeField");
-    }
+//    @FXML
+//    public void onNameFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
+//        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterNameField");
+//    }
+//
+//    @FXML
+//    public void onFirstNameFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
+//        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterFirstNameField");
+//    }
+//
+//    @FXML
+//    public void onAgeFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
+//        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterAgeField");
+//    }
+//
+//    @FXML
+//    public void onGradeFilterSearchButtonClicked(javafx.event.ActionEvent actionEvent) {
+//        TextField filterTextField = (TextField) mainPage.lookup("#searchFilterGradeField");
+//    }
 }

@@ -1,4 +1,4 @@
 package SearchFilter;
 
-public class LastnameFilter implements ISearchFilter {
-}
+//public class LastnameFilter implements ISearchFilter {
+//}

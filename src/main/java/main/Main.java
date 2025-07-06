@@ -21,8 +21,8 @@ public class Main extends Application {
         mainPage.setTitle("Plateforme Monitors");
         mainPage.setScene(new Scene(main_page, 800, 640));
 
-        MainPageController mainPageController = new MainPageController();
-        mainPageController.setScene(mainPage.getScene());
+//        MainPageController mainPageController = new MainPageController();
+//        mainPageController.setScene(mainPage.getScene());
 
         mainPage.show();
     }
