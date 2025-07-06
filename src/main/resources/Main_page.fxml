@@ -83,13 +83,13 @@
          <children>
             <VBox alignment="CENTER" prefHeight="272.0" prefWidth="565.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TableView VBox.vgrow="ALWAYS">
+                  <TableView VBox.vgrow="ALWAYS" fx:id="studentsTable">
                     <columns>
-                      <TableColumn id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
-                      <TableColumn id="dataTableStudentName" prefWidth="101.60000610351562" text="Nom" />
-                        <TableColumn id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
-                        <TableColumn id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
-                        <TableColumn id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />
+                        <TableColumn fx:id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
+                        <TableColumn fx:id="dataTableStudentName" prefWidth="101.60000610351562" text="Nom" />
+                        <TableColumn fx:id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
+                        <TableColumn fx:id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
+                        <TableColumn fx:id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

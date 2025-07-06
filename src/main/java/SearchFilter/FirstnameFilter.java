@@ -2,7 +2,9 @@ package SearchFilter;
 
 import Utils.DatabaseConnection;
 import Utils.StudentObject;
+import javafx.scene.control.TableColumn;
 
+import javax.xml.crypto.Data;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -20,17 +22,19 @@ public class FirstnameFilter implements ISearchFilter {
             ResultSet rs = st.executeQuery("SELECT * FROM student");
             System.out.println("J'essaye de récupérer la liste des étudiants");
             while (rs.next()) {
-                int id = rs.getInt(1);
-                String lastname = rs.getString(2);
-                String firstname = rs.getString(3);
-                int age = rs.getInt(4);
-                int average = rs.getInt(5);
-                StudentObject student = new StudentObject(id, lastname, firstname, age, average);
-                System.out.println(student.toString());
+                StudentObject student = new StudentObject(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getInt(5));
                 myList.add(student);
+                System.out.println(student.toString());
+
             }
             rs.close();
             st.close();
+            DatabaseConnection.databaseCloseConnexion();
 
         } catch (SQLException e) {
             System.out.println("ça n'a pas marché");
