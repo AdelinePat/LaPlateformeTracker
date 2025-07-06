@@ -86,7 +86,7 @@
                   <TableView VBox.vgrow="ALWAYS" fx:id="studentsTable">
                     <columns>
                         <TableColumn fx:id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
-                        <TableColumn fx:id="dataTableStudentName" prefWidth="101.60000610351562" text="Nom" />
+                        <TableColumn fx:id="dataTableStudentLastName" prefWidth="101.60000610351562" text="Nom" />
                         <TableColumn fx:id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
                         <TableColumn fx:id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
                         <TableColumn fx:id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />

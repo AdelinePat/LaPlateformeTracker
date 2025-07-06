@@ -29,7 +29,7 @@ public class MainPageController implements Initializable {
     private TableColumn<StudentObject, Integer> dataTableStudentID;
 
     @FXML
-    private TableColumn<StudentObject, String> dataTableStudentName;
+    private TableColumn<StudentObject, String> dataTableStudentLastName;
 
     @FXML
     private TableColumn<StudentObject, String> dataTableStudentFirstName;
@@ -43,7 +43,7 @@ public class MainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dataTableStudentID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
-        dataTableStudentName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getLastname()));
+        dataTableStudentLastName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getLastname()));
         dataTableStudentFirstName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFirstname()));
         dataTableStudentAge.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getAge()));
         dataTableStudentGrade.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getGrade()));

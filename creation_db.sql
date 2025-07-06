@@ -26,3 +26,6 @@ CREATE TABLE IF NOT EXISTS student_group (
     FOREIGN KEY (id_student) REFERENCES student(id_student) ON DELETE CASCADE,
     FOREIGN KEY (id_group) REFERENCES group_project(id_group) ON DELETE CASCADE
 );
+
+INSERT INTO student (lastname, firstname, age, average)
+VALUES ('Doe', 'John', 25, 12), ('Navet', 'Florence', 40, 18), ('Patenne', 'Adeline', 29, 15), ('Mangeot', 'Jolyne', 20, 17);

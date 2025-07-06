@@ -9,7 +9,7 @@ public class StudentObject {
     public StudentObject() {
     };
 
-    public StudentObject(int id, String firstname, String lastname, int age, double grade) {
+    public StudentObject(int id, String lastname, String firstname, int age, double grade) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;
