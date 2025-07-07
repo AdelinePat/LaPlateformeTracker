@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="580.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="IHMController.RegisterPageController">
+   <padding>
+      <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
+   </padding>
+   <children>
+      <Label text="La Plateforme Tracker">
+         <font>
+            <Font name="Leelawadee UI" size="26.0" />
+         </font>
+      </Label>
+      <VBox alignment="CENTER" prefHeight="45.0" prefWidth="540.0" spacing="5.0">
+         <children>
+            <Label text="Création de compte">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Label>
+            <Label fx:id="registerErrorLabel" prefHeight="18.0" prefWidth="419.0" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="100.0" prefHeight="45.0" prefWidth="560.0" spacing="5.0">
+         <children>
+            <Label text="Nom d'utilisateur">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Label>
+            <TextField fx:id="registerUserField" maxWidth="-Infinity" prefWidth="250.0" VBox.vgrow="NEVER" />
+         </children>
+      </VBox>
+      <VBox alignment="CENTER" maxHeight="100.0" prefHeight="45.0" prefWidth="560.0" spacing="5.0">
+         <children>
+            <Label text="Mot de passe">
+               <font>
+                  <Font name="Leelawadee UI" size="12.0" />
+               </font>
+            </Label>
+            <PasswordField fx:id="registerPassWordField" maxWidth="-Infinity" prefHeight="21.0" prefWidth="250.0" />
+         </children>
+      </VBox>
+      <Button id="registerConfirmButton" mnemonicParsing="false" onAction="#onRegisterButtonClicked" text="Créer le compte" />
+      <Button id="accessRegisterButton" mnemonicParsing="false" onAction="#onReturnButtonClicked" text="Retour" />
+   </children>
+</VBox>
