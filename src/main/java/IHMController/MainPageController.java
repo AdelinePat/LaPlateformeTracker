@@ -3,6 +3,7 @@ package IHMController;
 //import SearchFilter.FirstnameFilter;
 import SearchFilter.NameFilter;
 import SearchFilter.SearchFilter;
+import SearchFilter.RangeFilter;
 import Utils.DatabaseConnection;
 import Utils.StudentObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -27,6 +28,19 @@ public class MainPageController implements Initializable {
 
     @FXML
     private TextField searchFilterFirstNameField;
+
+    @FXML
+    private TextField searchFilterMinGradeField;
+
+    @FXML
+    private TextField searchFilterMaxGradeField;
+
+
+    @FXML
+    private TextField searchFilterMinAgeField;
+
+    @FXML
+    private TextField searchFilterMaxAgeField;
 
     @FXML
     private TableView<StudentObject> studentsTable;
@@ -93,8 +107,6 @@ public class MainPageController implements Initializable {
         studentData.addAll(aList);
 
         studentsTable.setItems(studentData);
-
-//        TableColumn<StudentObject, String> column = new TableColumn<>("Student string");
     }
 
     @FXML
@@ -105,19 +117,55 @@ public class MainPageController implements Initializable {
                 .getFilteredStudentList(
                         "lastname",
                         searchFilterNameField.getText());
+
+        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
+        studentData.addAll(studentList);
+
+        studentsTable.setItems(studentData);
+    }
+
+    @FXML
+    public void onSearchFirstNameButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton recherche par prénom cliqué");
+        SearchFilter filter = new NameFilter();
+        List<StudentObject> studentList = filter
+                .getFilteredStudentList(
+                        "firstname",
+                        searchFilterFirstNameField.getText());
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
         studentsTable.setItems(studentData);
     }
 
     @FXML
-    public void onSearchFirstNameButton(javafx.event.ActionEvent actionEvent) {
-        System.out.println("Bouton recherche par nom de famille cliqué");
-        SearchFilter filter = new NameFilter();
+    public void onSearchGradeButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton recherche par notes cliqué");
+        SearchFilter filter = new RangeFilter();
+        String userInput = searchFilterMinGradeField.getText() + "-" + searchFilterMaxGradeField.getText();
+
         List<StudentObject> studentList = filter
                 .getFilteredStudentList(
-                        "firstname",
-                        searchFilterFirstNameField.getText());
+                        "average",
+                        userInput
+                        );
+
+        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
+        studentData.addAll(studentList);
+        studentsTable.setItems(studentData);
+    }
+
+    @FXML
+    public void onSearchAgeButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton recherche par notes cliqué");
+        SearchFilter filter = new RangeFilter();
+        String userInput = searchFilterMinAgeField.getText() + "-" + searchFilterMaxAgeField.getText();
+
+        List<StudentObject> studentList = filter
+                .getFilteredStudentList(
+                        "age",
+                        userInput
+                );
+
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
         studentsTable.setItems(studentData);

@@ -56,10 +56,10 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Note minimum :" />
-                        <TextField id="searchFilterMinGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
+                        <TextField fx:id="searchFilterMinGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
                         <Label alignment="CENTER" prefHeight="25.0" text="Note maximum :" />
-                        <TextField id="searchFilterMaxGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
-                        <Button id="searchFilterGradeButton" mnemonicParsing="false" text="Appliquer" />
+                        <TextField fx:id="searchFilterMaxGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
+                        <Button id="searchFilterGradeButton"  onAction="#onSearchGradeButton" mnemonicParsing="false" text="Appliquer" />
                      </children>
                   </HBox>
                </content>
@@ -69,10 +69,10 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Âge minimum :" />
-                        <TextField id="searchFilterMinAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
+                        <TextField fx:id="searchFilterMinAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
                         <Label alignment="CENTER" prefHeight="25.0" text="Âge maximum :" />
-                        <TextField id="searchFilterMaxAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
-                        <Button id="searchFilterAgeButton" mnemonicParsing="false" text="Appliquer" />
+                        <TextField fx:id="searchFilterMaxAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
+                        <Button id="searchFilterAgeButton" onAction="#onSearchAgeButton" mnemonicParsing="false" text="Appliquer" />
                      </children>
                   </HBox>
                </content>

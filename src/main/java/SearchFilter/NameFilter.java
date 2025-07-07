@@ -39,7 +39,7 @@ public class NameFilter extends SearchFilter {
             DatabaseConnection.databaseCloseConnexion();
 
         } catch (SQLException e) {
-            System.out.println("Erreur lors du filtrage par prénom: " + e.getMessage());
+            System.out.println("SQL Error during name filtering: " + e.getMessage());
         }
 
         return filteredList;
