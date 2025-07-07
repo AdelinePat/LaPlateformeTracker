@@ -38,6 +38,6 @@ public abstract class SearchFilter {
         }
         return myList;
     }
-
-    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
+    public abstract List<StudentObject> getFilteredStudentList(FilterCommand filterCommand) throws Exception;
+//    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
 }
