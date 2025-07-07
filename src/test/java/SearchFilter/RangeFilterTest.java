@@ -17,8 +17,12 @@ public class RangeFilterTest {
     }
 
     @Test
-    public void getFilteredStudentListTest() {
-        List<StudentObject> students = filter.getFilteredStudentList("age", "20-30");
+    public void getFilteredStudentListTest() throws Exception {
+        FilterCommand command = new FilterCommand();
+        command.setType(FilterType.AGE);
+        command.setMinAgeValue(20);
+        command.setMinAgeValue(30);
+        List<StudentObject> students = filter.getFilteredStudentList(command);
         assertThat(students.isEmpty(), equalTo(false));
     }
 }

@@ -17,8 +17,11 @@ public class NameFilterTest {
     }
 
     @Test
-    public void getFilteredStudentListTest() {
-        List<StudentObject> students = filter.getFilteredStudentList("firstname", "Jo");
+    public void getFilteredStudentListTest() throws Exception {
+        FilterCommand command = new FilterCommand();
+        command.setType(FilterType.FIRSTNAME);
+        command.setSearchString("Jo");
+        List<StudentObject> students = filter.getFilteredStudentList(command);
         assertThat(students.isEmpty(), equalTo(false));
     }
 }
