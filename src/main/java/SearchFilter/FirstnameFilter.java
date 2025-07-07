@@ -1,44 +1,52 @@
-package SearchFilter;
+//package SearchFilter;
 
 import Utils.DatabaseConnection;
 import Utils.StudentObject;
-import javafx.scene.control.TableColumn;
+import java.sql.PreparedStatement;
 
-import javax.xml.crypto.Data;
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
-
-public class FirstnameFilter implements ISearchFilter {
-    public List<StudentObject> filterRequest() {
-        List<StudentObject> myList = new ArrayList<>();
-        try {
-            Connection conn = DatabaseConnection.databaseOpenConnexion();
-            System.out.println("connexion à la db ok");
-            Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM student");
-            System.out.println("J'essaye de récupérer la liste des étudiants");
-            while (rs.next()) {
-                StudentObject student = new StudentObject(
-                        rs.getInt(1),
-                        rs.getString(2),
-                        rs.getString(3),
-                        rs.getInt(4),
-                        rs.getInt(5));
-                myList.add(student);
-                System.out.println(student.toString());
-
-            }
-            rs.close();
-            st.close();
-            DatabaseConnection.databaseCloseConnexion();
-
-        } catch (SQLException e) {
-            System.out.println("ça n'a pas marché");
-        }
-        return myList;
-    }
-}
+//import javafx.scene.control.TableColumn;
+//
+//import javax.xml.crypto.Data;
+//import java.sql.Connection;
+//import java.sql.ResultSet;
+//import java.sql.SQLException;
+//import java.sql.Statement;
+//import java.util.ArrayList;
+//import java.util.List;
+//
+//public class FirstnameFilter extends SearchFilter {
+//    @Override
+//    public List<StudentObject> getFilteredStudentList(String contentRequest) {
+//        List<StudentObject> filteredList = new ArrayList<>();
+//        String columnName = "firstname";
+//        String query = "SELECT * FROM student WHERE " + columnName + " ILIKE ?";
+//
+//        try {
+//            Connection conn = DatabaseConnection.databaseOpenConnexion();
+//            PreparedStatement ps = conn.prepareStatement(query);
+//            ps.setString(1, contentRequest + "%"); // match firstnames starting with input
+//
+//            ResultSet rs = ps.executeQuery();
+//            while (rs.next()) {
+//                StudentObject student = new StudentObject(
+//                        rs.getInt(1),
+//                        rs.getString(2),
+//                        rs.getString(3),
+//                        rs.getInt(4),
+//                        rs.getInt(5)
+//                );
+//                filteredList.add(student);
+//                System.out.println(student.toString());
+//            }
+//
+//            rs.close();
+//            ps.close();
+//            DatabaseConnection.databaseCloseConnexion();
+//
+//        } catch (SQLException e) {
+//            System.out.println("Erreur lors du filtrage par prénom: " + e.getMessage());
+//        }
+//
+//        return filteredList;
+//    }
+//}

@@ -29,3 +29,4 @@ CREATE TABLE IF NOT EXISTS student_group (
 
 INSERT INTO student (lastname, firstname, age, average)
 VALUES ('Doe', 'John', 25, 12), ('Navet', 'Florence', 40, 18), ('Patenne', 'Adeline', 29, 15), ('Mangeot', 'Jolyne', 20, 17);
+

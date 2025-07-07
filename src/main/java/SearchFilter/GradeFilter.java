@@ -1,4 +1,14 @@
 package SearchFilter;
 
-//public class GradeFilter implements ISearchFilter {
-//}
+import Utils.StudentObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+public class GradeFilter extends SearchFilter {
+    @Override
+    public List<StudentObject> getFilteredStudentList(String columnName, String contentRequest) {
+        List<StudentObject> filteredList = new ArrayList<>();
+        return filteredList;
+    }
+}

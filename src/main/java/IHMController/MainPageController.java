@@ -1,7 +1,8 @@
 package IHMController;
 
-import SearchFilter.FirstnameFilter;
-import SearchFilter.ISearchFilter;
+//import SearchFilter.FirstnameFilter;
+import SearchFilter.NameFilter;
+import SearchFilter.SearchFilter;
 import Utils.DatabaseConnection;
 import Utils.StudentObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -80,8 +81,8 @@ public class MainPageController implements Initializable {
     @FXML
     public void onLogoutButtonClicked(javafx.event.ActionEvent actionEvent) {
         System.out.println("Bouton déconnexion cliqué");
-        ISearchFilter filter = new FirstnameFilter();
-        List< StudentObject> aList = filter.filterRequest();
+        SearchFilter filter = new NameFilter();
+        List< StudentObject> aList = filter.getInitialStudentList();
 
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(aList);
