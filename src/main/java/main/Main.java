@@ -1,5 +1,6 @@
 package main;
 
+import IHMController.LoginPageController;
 import IHMController.MainPageController;
 import Utils.DatabaseConnection;
 import javafx.application.Application;
