@@ -20,7 +20,7 @@ public class SceneManager {
         Parent mainPageParent = mainLoader.load();
         MainPageController mainPageController = mainLoader.getController();
         mainPageController.setManager(this);
-        mainPageScene = new Scene(mainPageParent, 800, 520);
+        mainPageScene = new Scene(mainPageParent, 800, 800);
 
         FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/LoginPage.fxml"));
         Parent loginPageParent = loginLoader.load();

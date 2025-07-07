@@ -37,6 +37,8 @@ public class StudentObject {
         return grade;
     }
 
+    public void setId(int id) { this.id = id; }
+
     public void setFirstname(String firstname) {
         this.firstname = firstname;
     }

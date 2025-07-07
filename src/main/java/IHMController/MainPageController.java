@@ -4,27 +4,25 @@ package IHMController;
 import SearchFilter.NameFilter;
 import SearchFilter.SearchFilter;
 import SearchFilter.RangeFilter;
-import Utils.DatabaseConnection;
 import Utils.StudentObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
-import javafx.stage.Stage;
+import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
+    private StudentObject selectedStudent = null;
 
     public void setManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -41,7 +39,6 @@ public class MainPageController implements Initializable {
 
     @FXML
     private TextField searchFilterMaxGradeField;
-
 
     @FXML
     private TextField searchFilterMinAgeField;
@@ -67,6 +64,18 @@ public class MainPageController implements Initializable {
     @FXML
     private TableColumn<StudentObject, Double> dataTableStudentGrade;
 
+    @FXML
+    private TextField enterStudentLastName;
+
+    @FXML
+    private TextField enterStudentFirstName;
+
+    @FXML
+    private TextField enterStudentAge;
+
+    @FXML
+    private TextField enterStudentGrade;
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SearchFilter filter = new NameFilter();
@@ -81,12 +90,12 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void onLogoutButtonClicked(javafx.event.ActionEvent actionEvent) {
+    public void onLogoutButtonClicked(ActionEvent actionEvent) {
         sceneManager.switchToLoginPage();
     }
 
     @FXML
-    public void onSearchLastNameButton(javafx.event.ActionEvent actionEvent) {
+    public void onSearchLastNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par nom de famille cliqué");
         SearchFilter filter = new NameFilter();
         List<StudentObject> studentList = filter
@@ -98,7 +107,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void onSearchFirstNameButton(javafx.event.ActionEvent actionEvent) {
+    public void onSearchFirstNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par prénom cliqué");
         SearchFilter filter = new NameFilter();
         List<StudentObject> studentList = filter
@@ -110,7 +119,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void onSearchGradeButton(javafx.event.ActionEvent actionEvent) {
+    public void onSearchGradeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
         SearchFilter filter = new RangeFilter();
         String userInput = searchFilterMinGradeField.getText() + "-" + searchFilterMaxGradeField.getText();
@@ -125,7 +134,7 @@ public class MainPageController implements Initializable {
     }
 
     @FXML
-    public void onSearchAgeButton(javafx.event.ActionEvent actionEvent) {
+    public void onSearchAgeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
         SearchFilter filter = new RangeFilter();
         String userInput = searchFilterMinAgeField.getText() + "-" + searchFilterMaxAgeField.getText();
@@ -143,5 +152,31 @@ public class MainPageController implements Initializable {
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
         studentsTable.setItems(studentData);
+    }
+
+    @FXML
+    public void onTableClicked(MouseEvent actionEvent) {
+        if (studentsTable.getSelectionModel().getSelectedIndex() != -1) {
+            selectedStudent = new StudentObject(
+                    studentsTable.getSelectionModel().getSelectedItem().getId(),
+                    studentsTable.getSelectionModel().getSelectedItem().getLastname(),
+                    studentsTable.getSelectionModel().getSelectedItem().getFirstname(),
+                    studentsTable.getSelectionModel().getSelectedItem().getAge(),
+                    studentsTable.getSelectionModel().getSelectedItem().getGrade()
+            );
+        }
+        enterStudentLastName.setText(selectedStudent.getLastname());
+        enterStudentFirstName.setText(selectedStudent.getFirstname());
+        enterStudentAge.setText(String.valueOf(selectedStudent.getAge()));
+        enterStudentGrade.setText(String.valueOf(selectedStudent.getGrade()));
+    }
+
+    @FXML
+    public void clearStudentSelection(ActionEvent actionEvent) {
+        selectedStudent = null;
+        enterStudentLastName.setText("");
+        enterStudentFirstName.setText("");
+        enterStudentAge.setText("");
+        enterStudentGrade.setText("");
     }
 }
