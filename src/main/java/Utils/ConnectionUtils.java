@@ -7,6 +7,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ConnectionUtils {
+    // regex => registerclass
     private String passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&])[A-Za-z\\d@$!%*#?&]{10,}$";
     private Pattern pattern = Pattern.compile(this.passwordRegex);
 
@@ -21,6 +22,7 @@ public class ConnectionUtils {
         return match.matches();
     }
 
+    // add to userobject
     public static String hashPassword(String password) {
 //        PBEKeySpec spec = new PBEKeySpec(password.toCharArray())
         return new String();
