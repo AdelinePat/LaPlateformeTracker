@@ -23,6 +23,7 @@ public class DatabaseConnection {
     }
 
     public static Connection databaseOpenConnexion() throws SQLException {
+        System.out.println(URL + " " + USER + " " + PASSWORD);
         if (connection == null || connection.isClosed()) {
             connection = DriverManager.getConnection(URL,USER,PASSWORD);
             System.out.println("Database connection opened.");
