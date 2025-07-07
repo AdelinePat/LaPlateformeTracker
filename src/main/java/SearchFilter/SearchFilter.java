@@ -24,7 +24,7 @@ public abstract class SearchFilter {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getInt(5));
+                        rs.getDouble(5));
                 myList.add(student);
                 System.out.println(student.toString());
 
@@ -38,6 +38,6 @@ public abstract class SearchFilter {
         }
         return myList;
     }
-
-    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
+    public abstract List<StudentObject> getFilteredStudentList(FilterCommand filterCommand) throws Exception;
+//    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
 }

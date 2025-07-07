@@ -5,6 +5,7 @@ import SearchFilter.NameFilter;
 import SearchFilter.SearchFilter;
 import SearchFilter.RangeFilter;
 import Utils.StudentObject;
+import Utils.UserObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,14 +20,24 @@ import javafx.scene.input.MouseEvent;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Filter;
+import SearchFilter.FilterCommand;
+
+import static SearchFilter.FilterType.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
+    private UserObject user;
+
+    public void setUser(UserObject user) {
+        this.user = user;
+    }
     private StudentObject selectedStudent = null;
 
     public void setManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+
 
     @FXML
     private TextField searchFilterNameField;
@@ -78,15 +89,18 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SearchFilter filter = new NameFilter();
-        List<StudentObject> studentList = filter.getInitialStudentList();
-        this.updateStudentList(studentList);
 
         dataTableStudentID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         dataTableStudentLastName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getLastname()));
         dataTableStudentFirstName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFirstname()));
         dataTableStudentAge.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getAge()));
         dataTableStudentGrade.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getGrade()));
+    }
+
+    public void fillContent() {
+        SearchFilter filter = new NameFilter();
+        List<StudentObject> studentList = filter.getInitialStudentList();
+        this.updateStudentList(studentList);
     }
 
     @FXML
@@ -98,53 +112,71 @@ public class MainPageController implements Initializable {
     public void onSearchLastNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par nom de famille cliqué");
         SearchFilter filter = new NameFilter();
-        List<StudentObject> studentList = filter
-                .getFilteredStudentList(
-                        "lastname",
-                        searchFilterNameField.getText());
-
-        this.updateStudentList(studentList);
+        FilterCommand command = new FilterCommand();
+        command.setType(LASTNAME);
+        command.setSearchString(searchFilterNameField.getText());
+        List<StudentObject> studentList = null;
+        try {
+            studentList = filter
+                    .getFilteredStudentList(command);
+            this.updateStudentList(studentList);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     public void onSearchFirstNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par prénom cliqué");
         SearchFilter filter = new NameFilter();
-        List<StudentObject> studentList = filter
-                .getFilteredStudentList(
-                        "firstname",
-                        searchFilterFirstNameField.getText());
-
-        this.updateStudentList(studentList);
+        FilterCommand command = new FilterCommand();
+        command.setType(FIRSTNAME);
+        command.setSearchString(searchFilterFirstNameField.getText());
+        List<StudentObject> studentList = null;
+        try {
+            studentList = filter
+                    .getFilteredStudentList(command);
+            this.updateStudentList(studentList);
+        } catch (Exception e) {
+            System.out.println("oups filtre de prénom échoué");
+            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     public void onSearchGradeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
         SearchFilter filter = new RangeFilter();
-        String userInput = searchFilterMinGradeField.getText() + "-" + searchFilterMaxGradeField.getText();
-
-        List<StudentObject> studentList = filter
-                .getFilteredStudentList(
-                        "average",
-                        userInput
-                        );
-
-        this.updateStudentList(studentList);
+        FilterCommand command = new FilterCommand();
+        command.setType(AVERAGE);
+        command.setMinGradeValue(Float.parseFloat(searchFilterMinGradeField.getText()));
+        command.setMaxGradeValue(Float.parseFloat(searchFilterMaxGradeField.getText()));
+        try {
+            List<StudentObject> studentList = filter
+                    .getFilteredStudentList(command);
+            this.updateStudentList(studentList);
+        } catch (Exception e) {
+            System.out.println("oups filtre de notes échoué");
+//            throw new RuntimeException(e);
+        }
     }
 
     @FXML
     public void onSearchAgeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
         SearchFilter filter = new RangeFilter();
-        String userInput = searchFilterMinAgeField.getText() + "-" + searchFilterMaxAgeField.getText();
-
-        List<StudentObject> studentList = filter
-                .getFilteredStudentList(
-                        "age",
-                        userInput
-                );
-        this.updateStudentList(studentList);
+        FilterCommand command = new FilterCommand();
+        command.setType(AGE);
+        command.setMinAgeValue(Integer.parseInt(searchFilterMinAgeField.getText()));
+        command.setMaxAgeValue(Integer.parseInt(searchFilterMaxAgeField.getText()));
+        try {
+            List<StudentObject> studentList = filter
+                    .getFilteredStudentList(command);
+            this.updateStudentList(studentList);
+        } catch (Exception e) {
+            System.out.println("oups filtre de age échoué");
+//            throw new RuntimeException(e);
+        }
     }
 
 
