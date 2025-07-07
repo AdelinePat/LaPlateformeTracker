@@ -1,6 +1,8 @@
 package main;
 
+import IHMController.LoginPageController;
 import IHMController.MainPageController;
+import IHMController.SceneManager;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -15,14 +17,9 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage mainPage) throws Exception {
-        Parent main_page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource("/Main_page.fxml")));
-        mainPage.setTitle("Plateforme Monitors");
-        mainPage.setScene(new Scene(main_page, 800, 640));
-
-        MainPageController mainPageController = new MainPageController();
-        mainPageController.setScene(mainPage.getScene());
-
-        mainPage.show();
+    public void start(Stage applicationStage) throws Exception {
+        SceneManager sceneManager = new SceneManager(applicationStage);
+        sceneManager.switchToLoginPage();
+        applicationStage.show();
     }
 }
