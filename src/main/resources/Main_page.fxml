@@ -34,8 +34,8 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Nom recherché :" />
-                        <TextField id="searchFilterNameField" prefHeight="25.0" prefWidth="120.0" text="Nom" />
-                        <Button id="searchFilterNameButton" mnemonicParsing="false" text="Rechercher" />
+                        <TextField fx:id="searchFilterNameField" prefHeight="25.0" prefWidth="120.0" text="Nom" />
+                        <Button id="searchFilterNameButton" onAction="#onSearchLastNameButton" mnemonicParsing="false" text="Rechercher" />
                      </children>
                   </HBox>
                </content>
@@ -45,8 +45,8 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Prénom recherché :" />
-                        <TextField id="searchFilterFirstNameField" prefHeight="25.0" prefWidth="120.0" text="Prénom" />
-                        <Button id="searchFilterFirstNameButton" mnemonicParsing="false" text="Rechercher" />
+                        <TextField fx:id="searchFilterFirstNameField" prefHeight="25.0" prefWidth="120.0" text="Prénom" />
+                        <Button id="searchFilterFirstNameButton" onAction="#onSearchFirstNameButton" mnemonicParsing="false" text="Rechercher" />
                      </children>
                   </HBox>
                </content>
@@ -56,10 +56,10 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Note minimum :" />
-                        <TextField id="searchFilterMinGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
+                        <TextField fx:id="searchFilterMinGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
                         <Label alignment="CENTER" prefHeight="25.0" text="Note maximum :" />
-                        <TextField id="searchFilterMaxGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
-                        <Button id="searchFilterGradeButton" mnemonicParsing="false" text="Appliquer" />
+                        <TextField fx:id="searchFilterMaxGradeField" prefHeight="25.0" prefWidth="65.0" text="Note" />
+                        <Button id="searchFilterGradeButton"  onAction="#onSearchGradeButton" mnemonicParsing="false" text="Appliquer" />
                      </children>
                   </HBox>
                </content>
@@ -69,10 +69,10 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Âge minimum :" />
-                        <TextField id="searchFilterMinAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
+                        <TextField fx:id="searchFilterMinAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
                         <Label alignment="CENTER" prefHeight="25.0" text="Âge maximum :" />
-                        <TextField id="searchFilterMaxAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
-                        <Button id="searchFilterAgeButton" mnemonicParsing="false" text="Appliquer" />
+                        <TextField fx:id="searchFilterMaxAgeField" prefHeight="25.0" prefWidth="65.0" text="Âge" />
+                        <Button id="searchFilterAgeButton" onAction="#onSearchAgeButton" mnemonicParsing="false" text="Appliquer" />
                      </children>
                   </HBox>
                </content>
@@ -83,13 +83,13 @@
          <children>
             <VBox alignment="CENTER" prefHeight="272.0" prefWidth="565.0" HBox.hgrow="ALWAYS">
                <children>
-                  <TableView VBox.vgrow="ALWAYS">
+                  <TableView VBox.vgrow="ALWAYS" fx:id="studentsTable">
                     <columns>
-                      <TableColumn id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
-                      <TableColumn id="dataTableStudentName" prefWidth="101.60000610351562" text="Nom" />
-                        <TableColumn id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
-                        <TableColumn id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
-                        <TableColumn id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />
+                        <TableColumn fx:id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
+                        <TableColumn fx:id="dataTableStudentLastName" prefWidth="101.60000610351562" text="Nom" />
+                        <TableColumn fx:id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
+                        <TableColumn fx:id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
+                        <TableColumn fx:id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />
                     </columns>
                      <columnResizePolicy>
                         <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />

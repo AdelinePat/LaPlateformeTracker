@@ -3,7 +3,7 @@ package DAO;
 import Utils.StudentObject;
 
 public class StudentDAO extends UserDAO {
-    public static void createStudent(StudentObject student) {
+    public static void addStudent(StudentObject student) {
     }
 
     public static void updateStudent(StudentObject student) {
