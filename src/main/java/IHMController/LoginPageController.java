@@ -25,6 +25,7 @@ public class LoginPageController {
 
     @FXML
     public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent) {
+        sceneManager.switchToRegisterPage();
     }
 
 }
