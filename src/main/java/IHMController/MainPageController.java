@@ -22,6 +22,11 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 public class MainPageController implements Initializable {
+    @FXML
+    private TextField searchFilterNameField;
+
+    @FXML
+    private TextField searchFilterFirstNameField;
 
     @FXML
     private TableView<StudentObject> studentsTable;
@@ -82,7 +87,7 @@ public class MainPageController implements Initializable {
     public void onLogoutButtonClicked(javafx.event.ActionEvent actionEvent) {
         System.out.println("Bouton déconnexion cliqué");
         SearchFilter filter = new NameFilter();
-        List< StudentObject> aList = filter.getInitialStudentList();
+        List<StudentObject> aList = filter.getInitialStudentList();
 
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(aList);
@@ -92,6 +97,31 @@ public class MainPageController implements Initializable {
 //        TableColumn<StudentObject, String> column = new TableColumn<>("Student string");
     }
 
+    @FXML
+    public void onSearchLastNameButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton recherche par nom de famille cliqué");
+        SearchFilter filter = new NameFilter();
+        List<StudentObject> studentList = filter
+                .getFilteredStudentList(
+                        "lastname",
+                        searchFilterNameField.getText());
+        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
+        studentData.addAll(studentList);
+        studentsTable.setItems(studentData);
+    }
+
+    @FXML
+    public void onSearchFirstNameButton(javafx.event.ActionEvent actionEvent) {
+        System.out.println("Bouton recherche par nom de famille cliqué");
+        SearchFilter filter = new NameFilter();
+        List<StudentObject> studentList = filter
+                .getFilteredStudentList(
+                        "firstname",
+                        searchFilterFirstNameField.getText());
+        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
+        studentData.addAll(studentList);
+        studentsTable.setItems(studentData);
+    }
 
 
 //    @FXML

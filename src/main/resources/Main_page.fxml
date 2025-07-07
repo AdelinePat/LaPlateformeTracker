@@ -34,8 +34,8 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Nom recherché :" />
-                        <TextField id="searchFilterNameField" prefHeight="25.0" prefWidth="120.0" text="Nom" />
-                        <Button id="searchFilterNameButton" mnemonicParsing="false" text="Rechercher" />
+                        <TextField fx:id="searchFilterNameField" prefHeight="25.0" prefWidth="120.0" text="Nom" />
+                        <Button id="searchFilterNameButton" onAction="#onSearchLastNameButton" mnemonicParsing="false" text="Rechercher" />
                      </children>
                   </HBox>
                </content>
@@ -45,8 +45,8 @@
                   <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="20.0">
                      <children>
                         <Label alignment="CENTER" prefHeight="25.0" text="Prénom recherché :" />
-                        <TextField id="searchFilterFirstNameField" prefHeight="25.0" prefWidth="120.0" text="Prénom" />
-                        <Button id="searchFilterFirstNameButton" mnemonicParsing="false" text="Rechercher" />
+                        <TextField fx:id="searchFilterFirstNameField" prefHeight="25.0" prefWidth="120.0" text="Prénom" />
+                        <Button id="searchFilterFirstNameButton" onAction="#onSearchFirstNameButton" mnemonicParsing="false" text="Rechercher" />
                      </children>
                   </HBox>
                </content>
