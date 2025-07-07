@@ -2,6 +2,7 @@ package main;
 
 import IHMController.LoginPageController;
 import IHMController.MainPageController;
+import IHMController.SceneManager;
 import Utils.DatabaseConnection;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -17,14 +18,11 @@ public class Main extends Application {
     }
 
     @Override
-    public void start(Stage mainPage) throws Exception {
-        Parent main_page = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(DatabaseConnection.DASHBOARD_PATH)));
-        mainPage.setTitle("Plateforme Monitors");
-        mainPage.setScene(new Scene(main_page, 800, 640));
+    public void start(Stage applicationStage) throws Exception {
+        SceneManager sceneManager = new SceneManager(applicationStage);
+        sceneManager.switchToLoginPage();
+        applicationStage.show();
 
-//        MainPageController mainPageController = new MainPageController();
-//        mainPageController.setScene(mainPage.getScene());
-
-        mainPage.show();
+        applicationStage.show();
     }
 }
