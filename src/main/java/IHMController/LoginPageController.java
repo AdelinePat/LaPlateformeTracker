@@ -32,7 +32,7 @@ public class LoginPageController {
         user.setUserName(loginUserField.getText());
         user.setHashPassword((loginPassWordField.getText()));
         if (user.login()) {
-            sceneManager.switchToMainPage();
+            sceneManager.switchToMainPage(user);
         } else {
             throw new loginException("Erreur de connexion");
         }

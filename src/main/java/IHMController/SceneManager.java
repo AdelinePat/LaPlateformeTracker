@@ -13,13 +13,14 @@ public class SceneManager {
 
     Scene mainPageScene;
     Scene loginPageScene;
+    private final MainPageController mainPageController;
 
     public SceneManager(Stage applicationStage) throws IOException {
         this.applicationStage = applicationStage;
 
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/Main_page.fxml"));
         Parent mainPageParent = mainLoader.load();
-        MainPageController mainPageController = mainLoader.getController();
+        this.mainPageController = mainLoader.getController();
         mainPageController.setManager(this);
         mainPageScene = new Scene(mainPageParent, 800, 520);
 
@@ -35,8 +36,10 @@ public class SceneManager {
         applicationStage.setTitle("Plateforme Tracker - Connexion");
     }
 
-    public void switchToMainPage() {
+    public void switchToMainPage(UserObject user) {
         applicationStage.setScene(mainPageScene);
         applicationStage.setTitle("Plateforme Tracker - Dashboard");
+        this.mainPageController.fillContent();
+        this.mainPageController.setUser(user);
     }
 }

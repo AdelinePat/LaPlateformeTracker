@@ -6,6 +6,7 @@ import SearchFilter.SearchFilter;
 import SearchFilter.RangeFilter;
 import Utils.DatabaseConnection;
 import Utils.StudentObject;
+import Utils.UserObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -29,10 +30,16 @@ import static SearchFilter.FilterType.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
+    private UserObject user;
+
+    public void setUser(UserObject user) {
+        this.user = user;
+    }
 
     public void setManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
     }
+
 
     @FXML
     private TextField searchFilterNameField;
@@ -73,15 +80,18 @@ public class MainPageController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        SearchFilter filter = new NameFilter();
-        List<StudentObject> studentList = filter.getInitialStudentList();
-        this.updateStudentList(studentList);
 
         dataTableStudentID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         dataTableStudentLastName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getLastname()));
         dataTableStudentFirstName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getFirstname()));
         dataTableStudentAge.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getAge()));
         dataTableStudentGrade.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getGrade()));
+    }
+
+    public void fillContent() {
+        SearchFilter filter = new NameFilter();
+        List<StudentObject> studentList = filter.getInitialStudentList();
+        this.updateStudentList(studentList);
     }
 
     @FXML

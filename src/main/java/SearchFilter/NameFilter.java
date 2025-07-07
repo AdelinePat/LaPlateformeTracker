@@ -28,7 +28,7 @@ public class NameFilter extends SearchFilter {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getInt(5)
+                        rs.getDouble(5)
                 );
                 filteredList.add(student);
                 System.out.println(student.toString());
@@ -60,7 +60,7 @@ public class NameFilter extends SearchFilter {
                         rs.getString(2),
                         rs.getString(3),
                         rs.getInt(4),
-                        rs.getInt(5)
+                        rs.getDouble(5)
                 );
                 filteredList.add(student);
                 System.out.println(student.toString());
