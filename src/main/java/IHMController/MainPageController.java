@@ -70,12 +70,8 @@ public class MainPageController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         SearchFilter filter = new NameFilter();
-        List<StudentObject> aList = filter.getInitialStudentList();
-
-        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
-        studentData.addAll(aList);
-
-        studentsTable.setItems(studentData);
+        List<StudentObject> studentList = filter.getInitialStudentList();
+        this.updateStudentList(studentList);
 
         dataTableStudentID.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getId()));
         dataTableStudentLastName.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getLastname()));
@@ -98,10 +94,7 @@ public class MainPageController implements Initializable {
                         "lastname",
                         searchFilterNameField.getText());
 
-        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
-        studentData.addAll(studentList);
-
-        studentsTable.setItems(studentData);
+        this.updateStudentList(studentList);
     }
 
     @FXML
@@ -112,9 +105,8 @@ public class MainPageController implements Initializable {
                 .getFilteredStudentList(
                         "firstname",
                         searchFilterFirstNameField.getText());
-        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
-        studentData.addAll(studentList);
-        studentsTable.setItems(studentData);
+
+        this.updateStudentList(studentList);
     }
 
     @FXML
@@ -129,9 +121,7 @@ public class MainPageController implements Initializable {
                         userInput
                         );
 
-        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
-        studentData.addAll(studentList);
-        studentsTable.setItems(studentData);
+        this.updateStudentList(studentList);
     }
 
     @FXML
@@ -145,7 +135,11 @@ public class MainPageController implements Initializable {
                         "age",
                         userInput
                 );
+        this.updateStudentList(studentList);
+    }
 
+
+    private void updateStudentList(List<StudentObject> studentList) {
         ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
         studentsTable.setItems(studentData);
