@@ -6,9 +6,12 @@ CREATE TABLE IF NOT EXISTS student (
     average float
     );
 
+DROP TABLE IF EXISTS staff; 
+
 CREATE TABLE IF NOT EXISTS staff (
     id_user int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
-    username VARCHAR(255),
+    username VARCHAR(255) UNIQUE,
+    salt VARCHAR(255),
     password VARCHAR(255)
 )
 

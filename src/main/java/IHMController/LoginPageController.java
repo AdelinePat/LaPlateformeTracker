@@ -7,6 +7,9 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+
 public class LoginPageController {
     private SceneManager sceneManager;
 
@@ -24,7 +27,7 @@ public class LoginPageController {
     }
 
     @FXML
-    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException {
+    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException, NoSuchAlgorithmException, InvalidKeySpecException {
         UserObject user = new UserObject();
         user.setUserName(loginUserField.getText());
         user.setPassword((loginPassWordField.getText()));
