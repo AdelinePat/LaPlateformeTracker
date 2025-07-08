@@ -1,6 +1,7 @@
 package ihmcontroller;
 
 //import SearchFilter.FirstnameFilter;
+import javafx.scene.control.Label;
 import searchfilter.NameFilter;
 import searchfilter.SearchFilter;
 import searchfilter.RangeFilter;
@@ -39,6 +40,8 @@ public class MainPageController implements Initializable {
         this.sceneManager = sceneManager;
     }
 
+    @FXML
+    private Label mainPageErrorLabel;
 
     @FXML
     private TextField searchFilterNameField;
