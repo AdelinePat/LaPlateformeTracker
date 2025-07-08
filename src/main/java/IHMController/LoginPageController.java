@@ -1,5 +1,6 @@
 package IHMController;
 
+import LoginModule.Register;
 import Utils.UserObject;
 import customExceptions.loginException;
 import javafx.fxml.FXML;
