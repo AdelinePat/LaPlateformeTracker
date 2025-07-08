@@ -7,6 +7,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
+import javax.security.auth.login.LoginException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 
@@ -27,13 +28,16 @@ public class LoginPageController {
     }
 
     @FXML
-    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException, NoSuchAlgorithmException, InvalidKeySpecException, LoginException {
         UserObject user = new UserObject();
         user.setUserName(loginUserField.getText());
         user.setPassword((loginPassWordField.getText()));
         if (user.login()) {
+            loginErrorLabel.setText("");
             sceneManager.switchToMainPage(user);
+
         } else {
+            loginErrorLabel.setText("Username ou Password incorrect");
             throw new loginException("Erreur de connexion");
         }
     }

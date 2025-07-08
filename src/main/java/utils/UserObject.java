@@ -4,6 +4,7 @@ import DAO.UserDAO;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import javax.security.auth.login.LoginException;
 import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.security.spec.InvalidKeySpecException;
@@ -25,10 +26,14 @@ public class UserObject {
     public String LastnameFilter;
 
 
-    public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException {
-        byte[] salt = getSaltFromDatabase(this.userName);
-        this.hashPassword(salt);
-        return UserDAO.doesUserExist(this.userName) && UserDAO.doesPasswordMatch(this.userName, this.password);
+    public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException, LoginException {
+        if(UserDAO.doesUserExist(this.userName)) {
+            byte[] salt = getSaltFromDatabase(this.userName);
+            this.hashPassword(salt);
+            return UserDAO.doesPasswordMatch(this.userName, this.password);
+        } else {
+            throw new LoginException("User doesn't exist");
+        }
     }
 
     public byte[] generateSalt() {
