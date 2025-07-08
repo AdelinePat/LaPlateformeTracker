@@ -8,13 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class RangeFilterTest {
-    NoFilter filter = new RangeFilter();
-
-    @Test
-    public void getInitialStudentListTest() {
-        List<Student> students = filter.getInitialStudentList();
-        assertThat(students.isEmpty(), equalTo(false));
-    }
+    ISearchFilter filter = FilterFactory.createFilter(FilterType.AGE);
 
     @Test
     public void getFilteredStudentListTest() throws Exception {

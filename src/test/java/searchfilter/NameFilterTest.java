@@ -6,13 +6,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class NameFilterTest {
-    NoFilter filter = new NameFilter();
-
-    @Test
-    public void getInitialStudentListTest() {
-        List<Student> students = filter.getInitialStudentList();
-        assertThat(students.isEmpty(), equalTo(false));
-    }
+    ISearchFilter filter = FilterFactory.createFilter(FilterType.FIRSTNAME);
 
     @Test
     public void getFilteredStudentListTest() throws Exception {

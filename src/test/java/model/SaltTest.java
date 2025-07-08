@@ -2,18 +2,15 @@ package model;
 
 import org.junit.jupiter.api.Test;
 
-//public class SaltTest {
-//    User user = new User();
-//    Salt salt = new Salt();
-//
-//    @Test
-//    public void hashPasswordTest() throws Exception {
-//        salt.byteListSalt = salt.generateSalt();
-//        salt.hashPassword("password1");
-//    }
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.Matchers.equalTo;
 
-//    @Test
-//    public void generateSalt() {
-//        salt.generateSalt();
-//    }
-//}
+public class SaltTest {
+    Salt salt = new Salt("dMkUiLpMqk6zhhi7FsBkHg==");
+
+    @Test
+    public void hashPasswordTest() throws Exception {
+        String password = salt.hashPassword("Abcd*123456");
+        assertThat(password, equalTo("aEM4VBS0f6YqyQe/EywELg=="));
+    }
+}

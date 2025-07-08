@@ -8,17 +8,16 @@ import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
 import static org.hamcrest.MatcherAssert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 public class UserTest {
     User user = new User();
 
-
-
     @Test
     public void loginTest() throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException, LoginException {
-        user.setUserName("user1");
-        user.setPassword("pasSWWord1*");
-        boolean value = user.login();
+        user.setUserName("toto");
+        user.setPassword("Abcd*123456");
+        assertTrue(user.login());
     }
 
 
