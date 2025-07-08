@@ -1,6 +1,7 @@
 package ihmcontroller;
 
 import loginmodule.Register;
+import utils.DataUtils;
 import utils.UserObject;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -29,20 +30,17 @@ public class RegisterPageController {
         Register register = new Register();
         UserObject user = new UserObject();
         try {
+            if (DataUtils.isNameNotValid(registerUserField.getText())) {
+                throw new LoginException("Le nom d'utilisateur est invalide");
+            }
             user.setUserName(registerUserField.getText());
             user.setPassword(registerPassWordField.getText());
             register.register(user);
             registerErrorLabel.setText("Création du compte réussie");
             this.resetAllFields();
             sceneManager.switchToLoginPage();
-        } catch (LoginException e) {
-            registerErrorLabel.setText("Erreur utilisateur : " + e.getMessage());
-        } catch (SQLException e) {
-            registerErrorLabel.setText("Erreur de requête : " + e.getMessage());
-        } catch (NoSuchAlgorithmException e) {
-            registerErrorLabel.setText("Erreur d'algorithme de chiffrement : " + e.getMessage());
-        } catch (InvalidKeySpecException e) {
-            registerErrorLabel.setText("Erreur de clé invalide : " + e.getMessage());
+        } catch (LoginException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
+            registerErrorLabel.setText(e.getMessage());
         }
     }
 
