@@ -26,13 +26,10 @@ public class Salt {
         SecureRandom random = new SecureRandom();
         byte[] salt = new byte[16];
         random.nextBytes(salt);
-        System.out.println("generateSalt : " + salt);
         return salt;
     }
 
     public String hashPassword(String password) throws NoSuchAlgorithmException, InvalidKeySpecException {
-        System.out.println("Password: " + password);
-
         KeySpec spec = new PBEKeySpec(password.toCharArray(), this.byteListSalt, 65536, 128);
         SecretKeyFactory factory = SecretKeyFactory.getInstance("PBKDF2WithHmacSHA1");
 
