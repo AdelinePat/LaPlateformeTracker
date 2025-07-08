@@ -218,7 +218,6 @@ public class MainPageController implements Initializable {
         }
     }
 
-
     private void updateStudentList(List<Student> studentList) {
         ObservableList<Student> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
@@ -254,6 +253,7 @@ public class MainPageController implements Initializable {
     @FXML void deleteStudentSelection(ActionEvent actionEvent) {
         if  (selectedStudent != null) {
             deleteStudent(selectedStudent);
+            fillContent();
         }
     }
 
