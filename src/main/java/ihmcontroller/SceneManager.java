@@ -1,7 +1,7 @@
 package ihmcontroller;
 
 import utils.DatabaseConnection;
-import utils.UserObject;
+import model.User;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -44,7 +44,7 @@ public class SceneManager {
         applicationStage.setTitle("Plateforme Tracker - Connexion");
     }
 
-    public void switchToMainPage(UserObject user) {
+    public void switchToMainPage(User user) {
         applicationStage.setScene(mainPageScene);
         applicationStage.setTitle("Plateforme Tracker - Dashboard");
         this.mainPageController.fillContent();

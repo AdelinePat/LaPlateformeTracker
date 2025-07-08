@@ -1,15 +1,15 @@
-package utils;
+package model;
 
-public class StudentObject {
+public class Student {
     private int id;
     private String firstname;
     private String lastname;
     private int age;
     private double grade;
-    public StudentObject() {
+    public Student() {
     };
 
-    public StudentObject(int id, String lastname, String firstname, int age, double grade) {
+    public Student(int id, String lastname, String firstname, int age, double grade) {
         this.id = id;
         this.firstname = firstname;
         this.lastname = lastname;

@@ -2,7 +2,7 @@ package searchfilter;
 
 import exceptions.FilterException;
 import utils.DatabaseConnection;
-import utils.StudentObject;
+import model.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,8 +13,8 @@ import java.util.List;
 
 public class RangeFilter extends SearchFilter {
 
-    private List<StudentObject> ageFilter(int min, int max) throws SQLException, NumberFormatException{
-        List<StudentObject> filteredList = new ArrayList<>();
+    private List<Student> ageFilter(int min, int max) throws SQLException, NumberFormatException{
+        List<Student> filteredList = new ArrayList<>();
         String query = "SELECT * FROM student WHERE age BETWEEN ? AND ?";
 
         Connection conn = DatabaseConnection.databaseOpenConnexion();
@@ -23,7 +23,7 @@ public class RangeFilter extends SearchFilter {
         ps.setInt(2, max);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            StudentObject student = new StudentObject(
+            Student student = new Student(
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getString(3),
@@ -40,8 +40,8 @@ public class RangeFilter extends SearchFilter {
         return filteredList;
     }
 
-    private List<StudentObject> gradeFilter(float min, float max) throws SQLException, NumberFormatException {
-        List<StudentObject> filteredList = new ArrayList<>();
+    private List<Student> gradeFilter(float min, float max) throws SQLException, NumberFormatException {
+        List<Student> filteredList = new ArrayList<>();
         String query = "SELECT * FROM student WHERE average BETWEEN ? AND ?";
 
         Connection conn = DatabaseConnection.databaseOpenConnexion();
@@ -50,7 +50,7 @@ public class RangeFilter extends SearchFilter {
         ps.setFloat(2, max);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            StudentObject student = new StudentObject(
+            Student student = new Student(
                     rs.getInt(1),
                     rs.getString(2),
                     rs.getString(3),
@@ -68,7 +68,7 @@ public class RangeFilter extends SearchFilter {
     }
 
     @Override
-    public List<StudentObject> getFilteredStudentList(FilterCommand filterCommand) throws FilterException, NumberFormatException, SQLException {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws FilterException, NumberFormatException, SQLException {
         switch (filterCommand.getType()) {
             case AGE:
                 return ageFilter(filterCommand.getMinAgeValue(), filterCommand.getMaxAgeValue());

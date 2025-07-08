@@ -1,7 +1,7 @@
 package searchfilter;
 
 import utils.DatabaseConnection;
-import utils.StudentObject;
+import model.Student;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -12,8 +12,8 @@ import java.util.List;
 
 public class NameFilter extends SearchFilter {
 
-    private List<StudentObject> lastnameFilter(String lastname) {
-        List<StudentObject> filteredList = new ArrayList<>();
+    private List<Student> lastnameFilter(String lastname) {
+        List<Student> filteredList = new ArrayList<>();
         String query = "SELECT * FROM student WHERE lastname ILIKE ?";
 
         try {
@@ -23,7 +23,7 @@ public class NameFilter extends SearchFilter {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                StudentObject student = new StudentObject(
+                Student student = new Student(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -44,8 +44,8 @@ public class NameFilter extends SearchFilter {
         return filteredList;
     }
 
-    private List<StudentObject> firstnameFilter(String firstname) {
-        List<StudentObject> filteredList = new ArrayList<>();
+    private List<Student> firstnameFilter(String firstname) {
+        List<Student> filteredList = new ArrayList<>();
         String query = "SELECT * FROM student WHERE firstname ILIKE ?";
 
         try {
@@ -55,7 +55,7 @@ public class NameFilter extends SearchFilter {
 
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                StudentObject student = new StudentObject(
+                Student student = new Student(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -77,7 +77,7 @@ public class NameFilter extends SearchFilter {
     }
 
     @Override
-    public List<StudentObject> getFilteredStudentList(FilterCommand filterCommand) throws Exception {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception {
         switch (filterCommand.getType()) {
             case LASTNAME:
                 return lastnameFilter(filterCommand.getSearchString());

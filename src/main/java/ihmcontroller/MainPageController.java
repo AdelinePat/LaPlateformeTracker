@@ -1,15 +1,14 @@
 package ihmcontroller;
 
 //import SearchFilter.FirstnameFilter;
-import exceptions.FilterException;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
 import searchfilter.NameFilter;
 import searchfilter.SearchFilter;
 import searchfilter.RangeFilter;
 import utils.DataUtils;
-import utils.StudentObject;
-import utils.UserObject;
+import model.Student;
+import model.User;
 import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +21,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
-import java.nio.file.FileAlreadyExistsException;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -34,12 +32,12 @@ import static searchfilter.FilterType.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
-    private UserObject user;
+    private User user;
 
-    public void setUser(UserObject user) {
+    public void setUser(User user) {
         this.user = user;
     }
-    private StudentObject selectedStudent = null;
+    private Student selectedStudent = null;
 
     public void setManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -67,22 +65,22 @@ public class MainPageController implements Initializable {
     private TextField searchFilterMaxAgeField;
 
     @FXML
-    private TableView<StudentObject> studentsTable;
+    private TableView<Student> studentsTable;
 
     @FXML
-    private TableColumn<StudentObject, Integer> dataTableStudentID;
+    private TableColumn<Student, Integer> dataTableStudentID;
 
     @FXML
-    private TableColumn<StudentObject, String> dataTableStudentLastName;
+    private TableColumn<Student, String> dataTableStudentLastName;
 
     @FXML
-    private TableColumn<StudentObject, String> dataTableStudentFirstName;
+    private TableColumn<Student, String> dataTableStudentFirstName;
 
     @FXML
-    private TableColumn<StudentObject, Integer> dataTableStudentAge;
+    private TableColumn<Student, Integer> dataTableStudentAge;
 
     @FXML
-    private TableColumn<StudentObject, Double> dataTableStudentGrade;
+    private TableColumn<Student, Double> dataTableStudentGrade;
 
     @FXML
     private TextField enterStudentLastName;
@@ -108,7 +106,7 @@ public class MainPageController implements Initializable {
 
     public void fillContent() {
         SearchFilter filter = new NameFilter();
-        List<StudentObject> studentList = filter.getInitialStudentList();
+        List<Student> studentList = filter.getInitialStudentList();
         this.updateStudentList(studentList);
     }
 
@@ -122,16 +120,20 @@ public class MainPageController implements Initializable {
         System.out.println("Bouton recherche par nom de famille cliqué");
         SearchFilter filter = new NameFilter();
         FilterCommand command = new FilterCommand();
-        List<StudentObject> studentList = null;
+        List<Student> studentList = null;
         command.setType(LASTNAME);
         try {
-            if (DataUtils.isNameNotValid(searchFilterNameField.getText())) {
-                throw new StringInputException("Le nom est invalide");
+            if (!DataUtils.isInputEmpty(searchFilterNameField.getText())
+                    && DataUtils.isNameValid(searchFilterNameField.getText())) {
+                command.setSearchString(searchFilterNameField.getText());
+                studentList = filter
+                        .getFilteredStudentList(command);
+            } else if (DataUtils.isInputEmpty(searchFilterNameField.getText())) {
+                studentList = filter.getInitialStudentList();
+            } else {
+                throw new StringInputException("Le prénom est invalide");
             }
             command.setSearchString(searchFilterNameField.getText());
-
-            studentList = filter
-                    .getFilteredStudentList(command);
             this.updateStudentList(studentList);
         } catch (StringInputException e) {
             mainPageErrorLabel.setText(e.getMessage());
@@ -145,16 +147,21 @@ public class MainPageController implements Initializable {
         System.out.println("Bouton recherche par prénom cliqué");
         SearchFilter filter = new NameFilter();
         FilterCommand command = new FilterCommand();
-        List<StudentObject> studentList = null;
+        List<Student> studentList = null;
         command.setType(FIRSTNAME);
         try {
-            if (DataUtils.isNameNotValid(searchFilterFirstNameField.getText())) {
+            if (!DataUtils.isInputEmpty(searchFilterFirstNameField.getText())
+                    && DataUtils.isNameValid(searchFilterFirstNameField.getText())) {
+                command.setSearchString(searchFilterFirstNameField.getText());
+                studentList = filter
+                        .getFilteredStudentList(command);
+            } else if (DataUtils.isInputEmpty(searchFilterFirstNameField.getText())) {
+                studentList = filter.getInitialStudentList();
+            } else {
                 throw new StringInputException("Le prénom est invalide");
             }
-            command.setSearchString(searchFilterFirstNameField.getText());
-            studentList = filter
-                    .getFilteredStudentList(command);
             this.updateStudentList(studentList);
+            mainPageErrorLabel.setText("");
         } catch (StringInputException e) {
             mainPageErrorLabel.setText(e.getMessage());
         } catch (Exception e) {
@@ -172,7 +179,7 @@ public class MainPageController implements Initializable {
         try {
         command.setGradeValues(searchFilterMinGradeField.getText(),
                 searchFilterMaxGradeField.getText());
-            List<StudentObject> studentList = filter
+            List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
         }  catch (StringInputException | NumberFormatException | SQLException e) {
@@ -192,7 +199,7 @@ public class MainPageController implements Initializable {
         try {
             command.setAgeValues(searchFilterMinAgeField.getText(),
                     searchFilterMaxAgeField.getText());
-            List<StudentObject> studentList = filter
+            List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
         } catch (StringInputException | NumberFormatException | SQLException e) {
@@ -204,8 +211,8 @@ public class MainPageController implements Initializable {
     }
 
 
-    private void updateStudentList(List<StudentObject> studentList) {
-        ObservableList<StudentObject> studentData = FXCollections.observableArrayList();
+    private void updateStudentList(List<Student> studentList) {
+        ObservableList<Student> studentData = FXCollections.observableArrayList();
         studentData.addAll(studentList);
         studentsTable.setItems(studentData);
     }
@@ -213,7 +220,7 @@ public class MainPageController implements Initializable {
     @FXML
     public void onTableClicked(MouseEvent actionEvent) {
         if (studentsTable.getSelectionModel().getSelectedIndex() != -1) {
-            selectedStudent = new StudentObject(
+            selectedStudent = new Student(
                     studentsTable.getSelectionModel().getSelectedItem().getId(),
                     studentsTable.getSelectionModel().getSelectedItem().getLastname(),
                     studentsTable.getSelectionModel().getSelectedItem().getFirstname(),

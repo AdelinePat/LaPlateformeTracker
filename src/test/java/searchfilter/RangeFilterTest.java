@@ -1,5 +1,5 @@
 package searchfilter;
-import utils.StudentObject;
+import model.Student;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -12,7 +12,7 @@ public class RangeFilterTest {
 
     @Test
     public void getInitialStudentListTest() {
-        List<StudentObject> students = filter.getInitialStudentList();
+        List<Student> students = filter.getInitialStudentList();
         assertThat(students.isEmpty(), equalTo(false));
     }
 
@@ -22,7 +22,7 @@ public class RangeFilterTest {
         command.setType(FilterType.AGE);
         command.setMinAgeValue(20);
         command.setMaxAgeValue(30);
-        List<StudentObject> students = filter.getFilteredStudentList(command);
+        List<Student> students = filter.getFilteredStudentList(command);
         assertThat(students.isEmpty(), equalTo(false));
     }
 }

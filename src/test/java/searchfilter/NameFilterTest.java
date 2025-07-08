@@ -1,5 +1,5 @@
 package searchfilter;
-import utils.StudentObject;
+import model.Student;
 import org.junit.jupiter.api.Test;
 import java.util.List;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -10,7 +10,7 @@ public class NameFilterTest {
 
     @Test
     public void getInitialStudentListTest() {
-        List<StudentObject> students = filter.getInitialStudentList();
+        List<Student> students = filter.getInitialStudentList();
         assertThat(students.isEmpty(), equalTo(false));
     }
 
@@ -19,7 +19,7 @@ public class NameFilterTest {
         FilterCommand command = new FilterCommand();
         command.setType(FilterType.FIRSTNAME);
         command.setSearchString("Jo");
-        List<StudentObject> students = filter.getFilteredStudentList(command);
+        List<Student> students = filter.getFilteredStudentList(command);
         assertThat(students.isEmpty(), equalTo(false));
     }
 }

@@ -1,7 +1,7 @@
 package searchfilter;
 
 import utils.DatabaseConnection;
-import utils.StudentObject;
+import model.Student;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -12,14 +12,14 @@ import java.util.List;
 
 public abstract class SearchFilter {
 
-    public List<StudentObject> getInitialStudentList() {
-        List<StudentObject> myList = new ArrayList<>();
+    public List<Student> getInitialStudentList() {
+        List<Student> myList = new ArrayList<>();
         try {
             Connection conn = DatabaseConnection.databaseOpenConnexion();
             Statement st = conn.createStatement();
             ResultSet rs = st.executeQuery("SELECT * FROM student");
             while (rs.next()) {
-                StudentObject student = new StudentObject(
+                Student student = new Student(
                         rs.getInt(1),
                         rs.getString(2),
                         rs.getString(3),
@@ -38,6 +38,6 @@ public abstract class SearchFilter {
         }
         return myList;
     }
-    public abstract List<StudentObject> getFilteredStudentList(FilterCommand filterCommand) throws Exception;
+    public abstract List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception;
 //    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
 }

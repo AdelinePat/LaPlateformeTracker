@@ -2,7 +2,7 @@ package ihmcontroller;
 
 import loginmodule.Register;
 import utils.DataUtils;
-import utils.UserObject;
+import model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -27,15 +27,15 @@ public class RegisterPageController {
 
     @FXML
     public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent)  {
-        Register register = new Register();
-        UserObject user = new UserObject();
+        User user = new User();
         try {
-            if (DataUtils.isNameNotValid(registerUserField.getText())) {
+            if (!DataUtils.isNameValid(registerUserField.getText())
+                    || DataUtils.isInputEmpty(registerUserField.getText())) {
                 throw new LoginException("Le nom d'utilisateur est invalide");
             }
             user.setUserName(registerUserField.getText());
             user.setPassword(registerPassWordField.getText());
-            register.register(user);
+            user.register();
             registerErrorLabel.setText("Création du compte réussie");
             this.resetAllFields();
             sceneManager.switchToLoginPage();

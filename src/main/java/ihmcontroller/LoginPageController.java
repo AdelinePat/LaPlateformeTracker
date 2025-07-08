@@ -1,7 +1,7 @@
 package ihmcontroller;
 
 import utils.DataUtils;
-import utils.UserObject;
+import model.User;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
@@ -26,9 +26,10 @@ public class LoginPageController {
 
     @FXML
     public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent)  {
-        UserObject user = new UserObject();
+        User user = new User();
         try {
-            if (DataUtils.isNameNotValid(loginUserField.getText())) {
+            if (!DataUtils.isNameValid(loginUserField.getText())
+                    || DataUtils.isInputEmpty(loginUserField.getText())) {
                 throw new LoginException("Le nom d'utilisateur est invalide");
             }
             user.setUserName(loginUserField.getText());

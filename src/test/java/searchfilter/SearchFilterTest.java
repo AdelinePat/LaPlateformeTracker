@@ -1,6 +1,6 @@
 package searchfilter;
 
-import utils.StudentObject;
+import model.Student;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class SearchFilterTest {
 
     @Test
     public void filterRequestTest() {
-        List<StudentObject> students = filter.getInitialStudentList();
+        List<Student> students = filter.getInitialStudentList();
         assertThat(students.isEmpty(), equalTo(false));
     }
 }
