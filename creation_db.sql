@@ -54,8 +54,8 @@ VALUES
     ('Sabatier', 'Vanessa', 35, 11),
     ('Sherstiuk', 'Yuliia', 40, 11),
     ('Marchenko', 'Daria', 20, 14),
-    ('Sergey', 'Chukhno', 35, 20),
-    ('Rimma', 'Chukhno', 35, 17);
+    ('Chukhno', 'Sergey', 35, 20),
+    ('Chukhno', 'Rimma', 35, 17);
 
 INSERT INTO student (lastname, firstname, age, average)
 VALUES

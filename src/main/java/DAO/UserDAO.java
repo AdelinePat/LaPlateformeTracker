@@ -1,12 +1,9 @@
 package DAO;
 
-import Utils.DatabaseConnection;
-import Utils.UserObject;
-import customExceptions.loginException;
-import io.github.cdimascio.dotenv.Dotenv;
+import utils.DatabaseConnection;
+import exceptions.loginException;
 
 import java.sql.*;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserDAO {

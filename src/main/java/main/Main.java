@@ -1,16 +1,8 @@
 package main;
 
-import IHMController.LoginPageController;
-import IHMController.MainPageController;
-import IHMController.SceneManager;
-import Utils.DatabaseConnection;
+import ihmcontroller.SceneManager;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Objects;
 
 public class Main extends Application {
     public static void main(String[] args) {

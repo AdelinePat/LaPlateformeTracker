@@ -1,6 +1,6 @@
 package DAO;
 
-import Utils.StudentObject;
+import utils.StudentObject;
 
 public class StudentDAO extends UserDAO {
     public static void addStudent(StudentObject student) {
