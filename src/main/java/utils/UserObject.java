@@ -26,13 +26,13 @@ public class UserObject {
     public String LastnameFilter;
 
 
-    public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException, LoginException {
+    public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException, LoginException, SQLException {
         if(UserDAO.doesUserExist(this.userName)) {
             byte[] salt = getSaltFromDatabase(this.userName);
             this.hashPassword(salt);
             return UserDAO.doesPasswordMatch(this.userName, this.password);
         } else {
-            throw new LoginException("User doesn't exist");
+            throw new LoginException("ce nom d'utilisateur n'a pas été trouvé");
         }
     }
 
@@ -83,27 +83,22 @@ public class UserObject {
         return salt;
     }
 
-    private byte[] getSaltFromDatabase(String userName) {
+    private byte[] getSaltFromDatabase(String userName) throws SQLException {
         String query = "SELECT salt FROM staff WHERE username = ?";
+        Connection conn = DatabaseConnection.databaseOpenConnexion();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, userName); // match firstnames starting with input
 
-        try {
-            Connection conn = DatabaseConnection.databaseOpenConnexion();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, userName); // match firstnames starting with input
-
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                this.salt = rs.getString(1);
-            } else {
-                System.out.println("No user found with username: " + userName);
-            }
-            rs.close();
-            ps.close();
-            DatabaseConnection.databaseCloseConnexion();
-
-        } catch (SQLException e) {
-            System.out.println("SQL Error during name filtering: " + e.getMessage());
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            this.salt = rs.getString(1);
+        } else {
+            throw new SQLException("les données de cet utilisateur n'ont pas été trouvé");
         }
+        rs.close();
+        ps.close();
+        DatabaseConnection.databaseCloseConnexion();
+
         return this.decodeSalt(this.salt);
     }
 
