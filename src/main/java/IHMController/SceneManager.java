@@ -1,5 +1,6 @@
 package IHMController;
 
+import Utils.DatabaseConnection;
 import Utils.UserObject;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -19,19 +20,19 @@ public class SceneManager {
     public SceneManager(Stage applicationStage) throws IOException {
         this.applicationStage = applicationStage;
 
-        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource("/Main_page.fxml"));
+        FXMLLoader mainLoader = new FXMLLoader(getClass().getResource(DatabaseConnection.DASHBOARD_PATH));
         Parent mainPageParent = mainLoader.load();
         this.mainPageController = mainLoader.getController();
         mainPageController.setManager(this);
         mainPageScene = new Scene(mainPageParent, 800, 600);
 
-        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource("/LoginPage.fxml"));
+        FXMLLoader loginLoader = new FXMLLoader(getClass().getResource(DatabaseConnection.LOGIN_PATH));
         Parent loginPageParent = loginLoader.load();
         LoginPageController loginPageController = loginLoader.getController();
         loginPageController.setManager(this);
         loginPageScene = new Scene(loginPageParent, 580, 420);
 
-        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource("/RegisterPage.fxml"));
+        FXMLLoader registerLoader = new FXMLLoader(getClass().getResource(DatabaseConnection.REGISTER_PATH));
         Parent registerPageParent = registerLoader.load();
         RegisterPageController registerPageController = registerLoader.getController();
         registerPageController.setManager(this);

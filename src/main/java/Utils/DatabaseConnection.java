@@ -12,6 +12,8 @@ public class DatabaseConnection {
     private static final String USER;
     private static final String PASSWORD;
     public static final String DASHBOARD_PATH;
+    public static final String LOGIN_PATH;
+    public static final String REGISTER_PATH;
     private static Connection connection = null;
 
     static {
@@ -20,6 +22,8 @@ public class DatabaseConnection {
         USER = dotenv.get("USER");
         PASSWORD = dotenv.get("PASSWORD");
         DASHBOARD_PATH = dotenv.get("DASHBOARD_PATH");
+        REGISTER_PATH = dotenv.get("REGISTER_PATH");
+        LOGIN_PATH = dotenv.get("LOGIN_PATH");
     }
 
     public static Connection databaseOpenConnexion() throws SQLException {

@@ -21,7 +21,7 @@ public class RangeFilterTest {
         FilterCommand command = new FilterCommand();
         command.setType(FilterType.AGE);
         command.setMinAgeValue(20);
-        command.setMinAgeValue(30);
+        command.setMaxAgeValue(30);
         List<StudentObject> students = filter.getFilteredStudentList(command);
         assertThat(students.isEmpty(), equalTo(false));
     }

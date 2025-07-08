@@ -27,7 +27,7 @@ public class LoginPageController {
     public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException {
         UserObject user = new UserObject();
         user.setUserName(loginUserField.getText());
-        user.setHashPassword((loginPassWordField.getText()));
+        user.setPassword((loginPassWordField.getText()));
         if (user.login()) {
             sceneManager.switchToMainPage(user);
         } else {

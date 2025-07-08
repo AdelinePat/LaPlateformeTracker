@@ -6,6 +6,12 @@ CREATE TABLE IF NOT EXISTS student (
     average float
     );
 
+CREATE TABLE IF NOT EXISTS staff (
+    id_user int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    username VARCHAR(255),
+    password VARCHAR(255)
+)
+
 CREATE TABLE IF NOT EXISTS project (
     id_project int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
     name VARCHAR(255)
@@ -17,6 +23,9 @@ CREATE TABLE IF NOT EXISTS group_project (
     grade int,
     FOREIGN KEY (id_project) REFERENCES project(id_project)
     );
+
+INSERT INTO staff (username, password)
+VALUES ('adeline', '123456');
 
 CREATE TABLE IF NOT EXISTS student_group (
     id_student int NOT NULL,
