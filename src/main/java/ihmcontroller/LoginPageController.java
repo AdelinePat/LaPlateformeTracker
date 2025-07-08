@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javax.security.auth.login.LoginException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 public class LoginPageController {
     private SceneManager sceneManager;
@@ -28,23 +29,35 @@ public class LoginPageController {
     }
 
     @FXML
-    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent) throws loginException, NoSuchAlgorithmException, InvalidKeySpecException, LoginException {
+    public void onLoginButtonClicked(javafx.event.ActionEvent actionEvent)  {
         UserObject user = new UserObject();
         user.setUserName(loginUserField.getText());
         user.setPassword((loginPassWordField.getText()));
-        if (user.login()) {
-            loginErrorLabel.setText("");
-            sceneManager.switchToMainPage(user);
-
-        } else {
-            loginErrorLabel.setText("Username ou Password incorrect");
-            throw new loginException("Erreur de connexion");
+        try {
+            if (user.login()) {
+                this.resetAllFields();
+                sceneManager.switchToMainPage(user);
+            }
+        } catch (LoginException e) {
+            loginErrorLabel.setText("Erreur utilisateur : " + e.getMessage());
+        } catch (SQLException e) {
+            loginErrorLabel.setText("Erreur de requête : " + e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            loginErrorLabel.setText("Erreur d'algorithme de chiffrement : " + e.getMessage());
+        } catch (InvalidKeySpecException e) {
+            loginErrorLabel.setText("Erreur de clé invalide : " + e.getMessage());
         }
     }
 
     @FXML
     public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent) {
         sceneManager.switchToRegisterPage();
+    }
+
+    private void resetAllFields() {
+        loginErrorLabel.setText("");
+        loginUserField.setText("");
+        loginPassWordField.setText("");
     }
 
 }

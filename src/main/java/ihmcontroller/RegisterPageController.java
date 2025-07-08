@@ -10,6 +10,7 @@ import javafx.scene.control.TextField;
 import javax.security.auth.login.LoginException;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
+import java.sql.SQLException;
 
 public class RegisterPageController {
     private SceneManager sceneManager;
@@ -24,16 +25,35 @@ public class RegisterPageController {
 
 
     @FXML
-    public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent) throws LoginException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent)  {
         Register register = new Register();
         UserObject user = new UserObject();
-        user.setUserName(registerUserField.getText());
-        user.setPassword(registerPassWordField.getText());
-        register.register(user);
+        try {
+            user.setUserName(registerUserField.getText());
+            user.setPassword(registerPassWordField.getText());
+            register.register(user);
+            registerErrorLabel.setText("Création du compte réussie");
+            this.resetAllFields();
+            sceneManager.switchToLoginPage();
+        } catch (LoginException e) {
+            registerErrorLabel.setText("Erreur utilisateur : " + e.getMessage());
+        } catch (SQLException e) {
+            registerErrorLabel.setText("Erreur de requête : " + e.getMessage());
+        } catch (NoSuchAlgorithmException e) {
+            registerErrorLabel.setText("Erreur d'algorithme de chiffrement : " + e.getMessage());
+        } catch (InvalidKeySpecException e) {
+            registerErrorLabel.setText("Erreur de clé invalide : " + e.getMessage());
+        }
     }
 
     @FXML
     public void onReturnButtonClicked(javafx.event.ActionEvent actionEvent) {
         sceneManager.switchToLoginPage();
+    }
+
+    private void resetAllFields() {
+        registerErrorLabel.setText("");
+        registerUserField.setText("");
+        registerPassWordField.setText("");
     }
 }

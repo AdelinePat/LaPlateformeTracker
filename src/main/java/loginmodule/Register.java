@@ -26,7 +26,8 @@ public class Register {
             return match.matches();
         } else {
             throw new LoginException("Le mot de passe doit contenir au moins une minuscule, " +
-                    "une majuscule et un caractère spécial et doit faire au moins 10 caractères.");
+                    "une majuscule et un caractère spécial (@$!%*#?&) " +
+                    "et doit faire au moins 10 caractères.");
         }
     }
 
@@ -39,28 +40,29 @@ public class Register {
                 return true;
             }
         } else {
-            throw new LoginException("Cet utilisateur existe déjà");
+            throw new LoginException("cet utilisateur existe déjà");
         }
         return true;
     }
 
-    public void register(UserObject user) throws LoginException, NoSuchAlgorithmException, InvalidKeySpecException {
+    public void register(UserObject user) throws LoginException, NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         if(this.canRegister(user)){
             String query = "INSERT INTO staff (username, password, salt) VALUES (?, ?, ?)";
-            try {
-                Connection conn = DatabaseConnection.databaseOpenConnexion();
-                PreparedStatement ps = conn.prepareStatement(query);
-                ps.setString(1, user.getUserName());
-                ps.setString(2, user.getPassword());
-                ps.setString(3, user.getSalt());
-//                ResultSet rs = ps.executeQuery();
-                ps.executeUpdate();
-                ps.close();
-                DatabaseConnection.databaseCloseConnexion();
 
-            } catch (SQLException e) {
-                System.out.println("User couldn't be added: " + e.getMessage());
-            }
+            Connection conn = DatabaseConnection.databaseOpenConnexion();
+            PreparedStatement ps = conn.prepareStatement(query);
+
+            ps.setString(1, user.getUserName());
+            ps.setString(2, user.getPassword());
+            ps.setString(3, user.getSalt());
+            ps.executeUpdate();
+
+            ps.close();
+            DatabaseConnection.databaseCloseConnexion();
+
+//            catch (SQLException e) {
+//                System.out.println("User couldn't be added: " + e.getMessage());
+//            }
         }
     }
 }
