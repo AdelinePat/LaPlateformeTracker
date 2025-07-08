@@ -23,6 +23,7 @@ import java.util.ResourceBundle;
 
 import searchfilter.FilterCommand;
 
+import static DAO.StudentDAO.deleteStudent;
 import static searchfilter.FilterType.*;
 
 public class MainPageController implements Initializable {
@@ -196,11 +197,11 @@ public class MainPageController implements Initializable {
                     studentsTable.getSelectionModel().getSelectedItem().getAge(),
                     studentsTable.getSelectionModel().getSelectedItem().getGrade()
             );
+            enterStudentLastName.setText(selectedStudent.getLastname());
+            enterStudentFirstName.setText(selectedStudent.getFirstname());
+            enterStudentAge.setText(String.valueOf(selectedStudent.getAge()));
+            enterStudentGrade.setText(String.valueOf(selectedStudent.getGrade()));
         }
-        enterStudentLastName.setText(selectedStudent.getLastname());
-        enterStudentFirstName.setText(selectedStudent.getFirstname());
-        enterStudentAge.setText(String.valueOf(selectedStudent.getAge()));
-        enterStudentGrade.setText(String.valueOf(selectedStudent.getGrade()));
     }
 
     @FXML
@@ -210,5 +211,11 @@ public class MainPageController implements Initializable {
         enterStudentFirstName.setText("");
         enterStudentAge.setText("");
         enterStudentGrade.setText("");
+    }
+
+    @FXML void deleteStudentSelection(ActionEvent actionEvent) {
+        if  (selectedStudent != null) {
+            deleteStudent(selectedStudent);
+        }
     }
 }
