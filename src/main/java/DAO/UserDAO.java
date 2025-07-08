@@ -1,8 +1,7 @@
 package DAO;
 
 import utils.DatabaseConnection;
-import exceptions.loginException;
-
+import javax.security.auth.login.LoginException;
 import java.sql.*;
 import java.util.List;
 
@@ -34,48 +33,48 @@ public class UserDAO {
                     default:
                         rs.close();
                         ps.close();
-                        throw new loginException("Une erreur est survenue plusieurs utilisateurs" +
+                        throw new LoginException("Une erreur est survenue plusieurs utilisateurs" +
                                 "ont été trouvé avec ce nom : " + userName);
                 }
             }
             rs.close();
             ps.close();
             DatabaseConnection.databaseCloseConnexion();
-        } catch (SQLException | loginException e) {
+        } catch (SQLException | LoginException e) {
             System.out.println("SQL Error during name filtering: " + e.getMessage());
         }
         return result;
     }
 
-    public static boolean doesPasswordMatch(String userName, String password) {
+    public static boolean doesPasswordMatch(String userName, String password) throws SQLException, LoginException{
         String query = "SELECT COUNT(*) FROM staff WHERE username = ? AND password = ?";
         boolean result = false;
-        try {
-            Connection conn = DatabaseConnection.databaseOpenConnexion();
-            PreparedStatement ps = conn.prepareStatement(query);
-            ps.setString(1, userName);
-            ps.setString(2, password);
 
-            ResultSet rs = ps.executeQuery();
-            if (rs.next()) {
-                int count = rs.getInt(1);
-                switch (count) {
-                    case 1:
-                        result = true;
-                        break;
-                    default:
-                        rs.close();
-                        ps.close();
-                        throw new loginException("Une erreur est survenue aucun utilisateur " +
-                                "n'a été trouvé avec ce mot de passe : " + password);
-                }
+        Connection conn = DatabaseConnection.databaseOpenConnexion();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setString(1, userName);
+        ps.setString(2, password);
+
+        ResultSet rs = ps.executeQuery();
+        if (rs.next()) {
+            int count = rs.getInt(1);
+            switch (count) {
+                case 1:
+                    result = true;
+                    break;
+                default:
+                    rs.close();
+                    ps.close();
+                    throw new LoginException("Une erreur est survenue aucun utilisateur " +
+                            "n'a été trouvé avec les données entrées");
             }
-            rs.close();
-            ps.close();
-            DatabaseConnection.databaseCloseConnexion();
-        } catch (SQLException | loginException e) {
-            System.out.println("SQL Error during name filtering: " + e.getMessage());
         }
+        rs.close();
+        ps.close();
+        DatabaseConnection.databaseCloseConnexion();
+//        catch (SQLException | LoginException e) {
+//            System.out.println("SQL Error during name filtering: " + e.getMessage());
+//        }
         return result;
     }
 }

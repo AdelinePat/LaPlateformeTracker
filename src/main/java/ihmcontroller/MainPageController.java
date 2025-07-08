@@ -1,10 +1,13 @@
 package ihmcontroller;
 
 //import SearchFilter.FirstnameFilter;
+import exceptions.FilterException;
+import exceptions.StringInputException;
 import javafx.scene.control.Label;
 import searchfilter.NameFilter;
 import searchfilter.SearchFilter;
 import searchfilter.RangeFilter;
+import utils.DataUtils;
 import utils.StudentObject;
 import utils.UserObject;
 import javafx.beans.property.ReadOnlyObjectWrapper;
@@ -19,6 +22,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import java.net.URL;
+import java.nio.file.FileAlreadyExistsException;
+import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -117,13 +122,19 @@ public class MainPageController implements Initializable {
         System.out.println("Bouton recherche par nom de famille cliqué");
         SearchFilter filter = new NameFilter();
         FilterCommand command = new FilterCommand();
-        command.setType(LASTNAME);
-        command.setSearchString(searchFilterNameField.getText());
         List<StudentObject> studentList = null;
+        command.setType(LASTNAME);
         try {
+            if (DataUtils.isNameNotValid(searchFilterNameField.getText())) {
+                throw new StringInputException("Le nom est invalide");
+            }
+            command.setSearchString(searchFilterNameField.getText());
+
             studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
+        } catch (StringInputException e) {
+            mainPageErrorLabel.setText(e.getMessage());
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -134,13 +145,18 @@ public class MainPageController implements Initializable {
         System.out.println("Bouton recherche par prénom cliqué");
         SearchFilter filter = new NameFilter();
         FilterCommand command = new FilterCommand();
-        command.setType(FIRSTNAME);
-        command.setSearchString(searchFilterFirstNameField.getText());
         List<StudentObject> studentList = null;
+        command.setType(FIRSTNAME);
         try {
+            if (DataUtils.isNameNotValid(searchFilterFirstNameField.getText())) {
+                throw new StringInputException("Le prénom est invalide");
+            }
+            command.setSearchString(searchFilterFirstNameField.getText());
             studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
+        } catch (StringInputException e) {
+            mainPageErrorLabel.setText(e.getMessage());
         } catch (Exception e) {
             System.out.println("oups filtre de prénom échoué");
             throw new RuntimeException(e);
@@ -153,15 +169,17 @@ public class MainPageController implements Initializable {
         SearchFilter filter = new RangeFilter();
         FilterCommand command = new FilterCommand();
         command.setType(AVERAGE);
-        command.setMinGradeValue(Float.parseFloat(searchFilterMinGradeField.getText()));
-        command.setMaxGradeValue(Float.parseFloat(searchFilterMaxGradeField.getText()));
         try {
+        command.setGradeValues(searchFilterMinGradeField.getText(),
+                searchFilterMaxGradeField.getText());
             List<StudentObject> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
+        }  catch (StringInputException | NumberFormatException | SQLException e) {
+            mainPageErrorLabel.setText(e.getMessage());
+            this.resetGradeFilterFields();
         } catch (Exception e) {
-            System.out.println("oups filtre de notes échoué");
-//            throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -171,15 +189,17 @@ public class MainPageController implements Initializable {
         SearchFilter filter = new RangeFilter();
         FilterCommand command = new FilterCommand();
         command.setType(AGE);
-        command.setMinAgeValue(Integer.parseInt(searchFilterMinAgeField.getText()));
-        command.setMaxAgeValue(Integer.parseInt(searchFilterMaxAgeField.getText()));
         try {
+            command.setAgeValues(searchFilterMinAgeField.getText(),
+                    searchFilterMaxAgeField.getText());
             List<StudentObject> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
+        } catch (StringInputException | NumberFormatException | SQLException e) {
+            mainPageErrorLabel.setText(e.getMessage());
+            this.resetAgeFilterFields();
         } catch (Exception e) {
-            System.out.println("oups filtre de age échoué");
-//            throw new RuntimeException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -220,5 +240,15 @@ public class MainPageController implements Initializable {
         if  (selectedStudent != null) {
             deleteStudent(selectedStudent);
         }
+    }
+
+    public void resetAgeFilterFields() {
+        searchFilterMinAgeField.setText("");
+        searchFilterMaxAgeField.setText("");
+    }
+
+    public void resetGradeFilterFields() {
+        searchFilterMinGradeField.setText("");
+        searchFilterMaxGradeField.setText("");
     }
 }
