@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class NameFilter extends SearchFilter {
+public class NameFilter implements ISearchFilter {
 
     private List<Student> lastnameFilter(String lastname) {
         List<Student> filteredList = new ArrayList<>();

@@ -8,7 +8,7 @@ import static org.hamcrest.MatcherAssert.assertThat;
 import static org.hamcrest.Matchers.equalTo;
 
 public class RangeFilterTest {
-    SearchFilter filter = new RangeFilter();
+    NoFilter filter = new RangeFilter();
 
     @Test
     public void getInitialStudentListTest() {

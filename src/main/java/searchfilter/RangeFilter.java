@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RangeFilter extends SearchFilter {
+public class RangeFilter implements ISearchFilter {
 
     private List<Student> ageFilter(int min, int max) throws SQLException, NumberFormatException{
         List<Student> filteredList = new ArrayList<>();

@@ -1,6 +1,5 @@
 package ihmcontroller;
 
-import loginmodule.Register;
 import utils.DataUtils;
 import model.User;
 import javafx.fxml.FXML;

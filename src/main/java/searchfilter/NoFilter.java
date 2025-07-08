@@ -10,7 +10,14 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class SearchFilter {
+public class NoFilter implements ISearchFilter {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception {
+        if(FilterType.NOFILTER.equals(filterCommand.getType())){
+                return getInitialStudentList();
+        } else {
+            throw new Exception("blabla");
+        }
+    }
 
     public List<Student> getInitialStudentList() {
         List<Student> myList = new ArrayList<>();
@@ -38,6 +45,4 @@ public abstract class SearchFilter {
         }
         return myList;
     }
-    public abstract List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception;
-//    public abstract List<StudentObject> getFilteredStudentList(String columnName, String contentRequest);
 }

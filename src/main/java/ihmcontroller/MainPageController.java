@@ -3,9 +3,7 @@ package ihmcontroller;
 //import SearchFilter.FirstnameFilter;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
-import searchfilter.NameFilter;
-import searchfilter.SearchFilter;
-import searchfilter.RangeFilter;
+import searchfilter.*;
 import utils.DataUtils;
 import model.Student;
 import model.User;
@@ -105,7 +103,7 @@ public class MainPageController implements Initializable {
     }
 
     public void fillContent() {
-        SearchFilter filter = new NameFilter();
+        NoFilter filter = new NoFilter();
         List<Student> studentList = filter.getInitialStudentList();
         this.updateStudentList(studentList);
     }
@@ -118,18 +116,22 @@ public class MainPageController implements Initializable {
     @FXML
     public void onSearchLastNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par nom de famille cliqué");
-        SearchFilter filter = new NameFilter();
+//        ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
         FilterCommand command = new FilterCommand();
         List<Student> studentList = null;
-        command.setType(LASTNAME);
+
         try {
             if (!DataUtils.isInputEmpty(searchFilterNameField.getText())
                     && DataUtils.isNameValid(searchFilterNameField.getText())) {
                 command.setSearchString(searchFilterNameField.getText());
+                command.setType(LASTNAME);
+                ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
                 studentList = filter
                         .getFilteredStudentList(command);
             } else if (DataUtils.isInputEmpty(searchFilterNameField.getText())) {
-                studentList = filter.getInitialStudentList();
+                ISearchFilter filter = FilterFactory.createFilter(NOFILTER);
+                command.setType(NOFILTER);
+                studentList = filter.getFilteredStudentList(command);
             } else {
                 throw new StringInputException("Le prénom est invalide");
             }
@@ -145,18 +147,21 @@ public class MainPageController implements Initializable {
     @FXML
     public void onSearchFirstNameButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par prénom cliqué");
-        SearchFilter filter = new NameFilter();
         FilterCommand command = new FilterCommand();
         List<Student> studentList = null;
-        command.setType(FIRSTNAME);
+
         try {
             if (!DataUtils.isInputEmpty(searchFilterFirstNameField.getText())
                     && DataUtils.isNameValid(searchFilterFirstNameField.getText())) {
                 command.setSearchString(searchFilterFirstNameField.getText());
+                command.setType(FIRSTNAME);
+                ISearchFilter filter = FilterFactory.createFilter(command.getType());
                 studentList = filter
                         .getFilteredStudentList(command);
             } else if (DataUtils.isInputEmpty(searchFilterFirstNameField.getText())) {
-                studentList = filter.getInitialStudentList();
+                command.setType(NOFILTER);
+                ISearchFilter filter = FilterFactory.createFilter(command.getType());
+                studentList = filter.getFilteredStudentList(command);
             } else {
                 throw new StringInputException("Le prénom est invalide");
             }
@@ -173,12 +178,13 @@ public class MainPageController implements Initializable {
     @FXML
     public void onSearchGradeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
-        SearchFilter filter = new RangeFilter();
         FilterCommand command = new FilterCommand();
-        command.setType(AVERAGE);
+
         try {
-        command.setGradeValues(searchFilterMinGradeField.getText(),
-                searchFilterMaxGradeField.getText());
+            command.setGradeValues(searchFilterMinGradeField.getText(),
+                    searchFilterMaxGradeField.getText());
+            command.setType(AVERAGE);
+            ISearchFilter filter = FilterFactory.createFilter(command.getType());
             List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
@@ -193,12 +199,13 @@ public class MainPageController implements Initializable {
     @FXML
     public void onSearchAgeButton(ActionEvent actionEvent) {
         System.out.println("Bouton recherche par notes cliqué");
-        SearchFilter filter = new RangeFilter();
         FilterCommand command = new FilterCommand();
-        command.setType(AGE);
+
         try {
             command.setAgeValues(searchFilterMinAgeField.getText(),
                     searchFilterMaxAgeField.getText());
+            command.setType(AGE);
+            ISearchFilter filter = FilterFactory.createFilter(command.getType());
             List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
