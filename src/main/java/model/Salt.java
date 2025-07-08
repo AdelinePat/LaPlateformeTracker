@@ -10,7 +10,6 @@ import java.util.Base64;
 
 public class Salt {
     private byte[] byteListSalt;
-//    private String stringSalt;
 
     public Salt() {
         this.byteListSalt = generateSalt();

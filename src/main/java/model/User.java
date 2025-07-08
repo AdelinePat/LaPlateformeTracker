@@ -14,6 +14,8 @@ import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import static exceptions.ExceptionMessage.*;
+
 public class User {
     private String userName;
     private String password;
@@ -63,7 +65,7 @@ public class User {
         if (rs.next()) {
             salt.append(rs.getString(1));
         } else {
-            throw new SQLException("les données de cet utilisateur n'ont pas été trouvé");
+            throw new SQLException(USERDATA_NOT_FOUND.getMessage());
         }
         rs.close();
         ps.close();
@@ -83,9 +85,7 @@ public class User {
             System.out.println("Password is valid");
             return match.matches();
         } else {
-            throw new LoginException("Le mot de passe doit contenir au moins une minuscule, " +
-                    "une majuscule et un caractère spécial (@$!%*#?&) " +
-                    "et doit faire au moins 10 caractères.");
+            throw new LoginException(INVALID_PASSWORD.getMessage());
         }
     }
 
@@ -97,7 +97,7 @@ public class User {
                 return true;
             }
         } else {
-            throw new LoginException("cet utilisateur existe déjà");
+            throw new LoginException(USER_ALREADY_EXISTS.getMessage());
         }
         return true;
     }
