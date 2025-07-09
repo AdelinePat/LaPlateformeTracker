@@ -2,8 +2,10 @@ package exceptions;
 
 public enum ExceptionMessage {
     LOGIN_ERROR("L'utilisateur n'a pas été trouvé"),
+    HASH_ERROR("Une erreur est survenue"),
+    REGISTER_ERROR("L'utilisateur n'a pas pu être créé"),
     MULTIPLE_USERS_FOUND("Une erreur est survenue plusieurs utilisateurs ont été trouvé"),
-    USER_NOT_FOUND("ce nom d'utilisateur n'a pas été trouvé"),
+    USER_NOT_FOUND("L'utilisateur n'a pas été trouvé"),
     USERDATA_NOT_FOUND("les données de cet utilisateur n'ont pas été trouvé"),
     USER_ALREADY_EXISTS("cet utilisateur existe déjà"),
     INVALID_USERNAME("Le nom d'utilisateur est invalide"),
@@ -15,6 +17,9 @@ public enum ExceptionMessage {
     INVALID_INPUT("Le champs est invalide"),
     INVALID_INPUTS("Un ou plusieurs champs sont invalides"),
     INVALID_FILTER("Le filtre appliqué n'est pas reconnu"),
+    NO_RESULT("Aucun résultat n'a été trouvé avec ce filtre"),
+    SQL_ERROR("Une erreur est survenue"),
+    SQL_FORMAT_ERROR("Le format n'est pas convertible en format numérique"),
     STUDENT_NOT_SELECTED("Vous n'avez pas sélectionné d'étudiant");
 
     private ExceptionMessage(String message) {

@@ -68,7 +68,7 @@ public class RangeFilter implements ISearchFilter {
 //    }
 
     @Override
-    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws FilterException, NumberFormatException, SQLException {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws FilterException {
         switch (filterCommand.getType()) {
             case AGE:
                 return FilterStudentDAO.ageFilter(filterCommand.getMinAgeValue(), filterCommand.getMaxAgeValue());

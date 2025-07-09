@@ -41,7 +41,7 @@ public class LoginPageController {
                 this.resetAllFields();
                 sceneManager.switchToMainPage(user);
             }
-        } catch (LoginException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
+        } catch (LoginException e) {
             loginErrorLabel.setText(e.getMessage());
         }
     }

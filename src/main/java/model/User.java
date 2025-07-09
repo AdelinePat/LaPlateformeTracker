@@ -25,18 +25,20 @@ public class User {
     public String FirstnameFilter;
     public String LastnameFilter;
 
-    public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException, LoginException, SQLException {
-        if(UserDAO.doesUserExist(this.userName)) {
-            String salt = UserDAO.getSaltFromDatabase(this.userName);
-            this.salt = new Salt(salt);
-//            byte[] salt = getSaltFromDatabase(this.userName);
-            this.password = this.salt.hashPassword(this.password);
-
-            System.out.println("login after hashpassword : " + this.password);
-            return UserDAO.doesPasswordMatch(this.userName, this.password);
-        } else {
-            throw new LoginException(USER_NOT_FOUND.getMessage());
+    public boolean login() throws LoginException {
+        try {
+            if(UserDAO.doesUserExist(this.userName)) {
+                String salt = UserDAO.getSaltFromDatabase(this.userName);
+                this.salt = new Salt(salt);
+                this.password = this.salt.hashPassword(this.password);
+                return UserDAO.doesPasswordMatch(this.userName, this.password);
+            } else {
+                throw new LoginException(USER_NOT_FOUND.getMessage());
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException e) {
+            throw new LoginException(HASH_ERROR.getMessage());
         }
+
     }
 
     public void setUserName(String userName) {
@@ -105,9 +107,10 @@ public class User {
         return this.salt.getReadableSalt();
     }
 
-    public void register() throws LoginException, NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
-        if(this.canRegister()){
-            UserDAO.createUser(this);
+    public void register() throws LoginException {
+        try {
+            if(this.canRegister()){
+                UserDAO.createUser(this);
 //            String query = "INSERT INTO staff (username, password, salt) VALUES (?, ?, ?)";
 
 //            Connection conn = DatabaseConnection.databaseOpenConnexion();
@@ -120,6 +123,9 @@ public class User {
 //
 //            ps.close();
 //            DatabaseConnection.databaseCloseConnexion();
+            }
+        } catch (NoSuchAlgorithmException | InvalidKeySpecException | SQLException e) {
+            throw new LoginException(REGISTER_ERROR.getMessage());
         }
     }
 

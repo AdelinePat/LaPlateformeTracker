@@ -44,12 +44,22 @@ public class FilterCommand {
     public float getMaxGradeValue() {
         return maxGradeValue;
     }
+    private boolean isMaxAgeGreaterThanMinAge() {
+        return this.minAgeValue <= this.maxAgeValue;
+    }
+
+    private boolean isMaxGradeGreaterThanMinGrade() {
+        return this.minGradeValue <= this.maxGradeValue;
+    }
 
     public void setAgeValues(String minValue, String maxValue) throws StringInputException {
         this.setMinAgeValue(minValue);
         this.setMaxAgeValue(maxValue);
+        if (!this.isMaxAgeGreaterThanMinAge()) {
+            this.minAgeValue = this.maxAgeValue;
+            this.maxAgeValue = Integer.parseInt(minValue);
+        }
     }
-
     private void setMinAgeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputIntegerValid(value)) {
@@ -77,6 +87,10 @@ public class FilterCommand {
     public void setGradeValues(String minValue, String maxValue) throws StringInputException {
         this.setMinGradeValue(minValue);
         this.setMaxGradeValue(maxValue);
+        if (!this.isMaxGradeGreaterThanMinGrade()) {
+            this.minGradeValue = this.maxGradeValue;
+            this.maxGradeValue = Float.parseFloat(minValue);
+        }
     }
 
     private void setMinGradeValue(String value) throws StringInputException {
@@ -95,6 +109,7 @@ public class FilterCommand {
     private void setMaxGradeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputFloatValid(value)) {
+
             this.maxGradeValue = Float.parseFloat(value);
 //            this.setMaxGradeValue(Float.parseFloat(value));
         } else if (DataUtils.isInputEmpty(value)) {
@@ -103,6 +118,8 @@ public class FilterCommand {
         } else {
             throw new StringInputException(INVALID_INPUT_FLOAT.getMessage());
         }
+
+
     }
 
 

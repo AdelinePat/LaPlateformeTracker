@@ -40,7 +40,7 @@ public class RegisterPageController {
             registerErrorLabel.setText("Création du compte réussie");
             this.resetAllFields();
             sceneManager.switchToLoginPage();
-        } catch (LoginException | SQLException | NoSuchAlgorithmException | InvalidKeySpecException e) {
+        } catch (LoginException e) {
             registerErrorLabel.setText(e.getMessage());
         }
     }

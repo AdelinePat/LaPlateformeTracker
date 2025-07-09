@@ -1,6 +1,7 @@
 package searchfilter;
 
 import DAO.FilterStudentDAO;
+import exceptions.FilterException;
 import model.Student;
 import java.util.List;
 import static exceptions.ExceptionMessage.INVALID_FILTER;
@@ -72,13 +73,13 @@ public class NameFilter implements ISearchFilter {
 //    }
 
     @Override
-    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws FilterException {
         switch (filterCommand.getType()) {
             case LASTNAME:
                 return FilterStudentDAO.lastnameFilter(filterCommand.getSearchString());
             case FIRSTNAME:
                 return FilterStudentDAO.firstnameFilter(filterCommand.getSearchString());
-            default: throw new Exception(INVALID_FILTER.getMessage());
+            default: throw new FilterException(INVALID_FILTER.getMessage());
         }
     }
 

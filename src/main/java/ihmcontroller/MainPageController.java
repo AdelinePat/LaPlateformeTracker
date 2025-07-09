@@ -1,9 +1,6 @@
 package ihmcontroller;
-
-//import SearchFilter.FirstnameFilter;
 import DAO.FilterStudentDAO;
-import exceptions.DataException;
-import exceptions.ExceptionMessage;
+import exceptions.FilterException;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
 import searchfilter.*;
@@ -21,17 +18,14 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
+import javax.security.auth.login.LoginException;
 import java.net.URL;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import searchfilter.FilterCommand;
-
-import static DAO.StudentDAO.*;
-import static exceptions.ExceptionMessage.*;
+import static DAO.StudentDAO.deleteStudent;
+import static exceptions.ExceptionMessage.INVALID_INPUT;
 import static searchfilter.FilterType.*;
-import static utils.DataUtils.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
@@ -120,14 +114,13 @@ public class MainPageController implements Initializable {
 
     @FXML
     public void onSearchLastNameButton(ActionEvent actionEvent) {
-        System.out.println("Bouton recherche par nom de famille cliqué");
-//        ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
+        this.resetErrorLabel();
         FilterCommand command = new FilterCommand();
         List<Student> studentList = null;
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterNameField.getText())
-                    && isNameValid(searchFilterNameField.getText())) {
+                    && DataUtils.isNameValid(searchFilterNameField.getText())) {
                 command.setSearchString(searchFilterNameField.getText());
                 command.setType(LASTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
@@ -142,22 +135,20 @@ public class MainPageController implements Initializable {
             }
             command.setSearchString(searchFilterNameField.getText());
             this.updateStudentList(studentList);
-        } catch (StringInputException e) {
+        } catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
     @FXML
     public void onSearchFirstNameButton(ActionEvent actionEvent) {
-        System.out.println("Bouton recherche par prénom cliqué");
+        this.resetErrorLabel();
         FilterCommand command = new FilterCommand();
         List<Student> studentList = null;
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterFirstNameField.getText())
-                    && isNameValid(searchFilterFirstNameField.getText())) {
+                    && DataUtils.isNameValid(searchFilterFirstNameField.getText())) {
                 command.setSearchString(searchFilterFirstNameField.getText());
                 command.setType(FIRSTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(command.getType());
@@ -171,18 +162,15 @@ public class MainPageController implements Initializable {
                 throw new StringInputException(INVALID_INPUT.getMessage());
             }
             this.updateStudentList(studentList);
-            mainPageErrorLabel.setText("");
-        } catch (StringInputException e) {
+            this.resetErrorLabel();
+        } catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
-        } catch (Exception e) {
-            System.out.println("oups filtre de prénom échoué");
-            throw new RuntimeException(e);
         }
     }
 
     @FXML
     public void onSearchGradeButton(ActionEvent actionEvent) {
-        System.out.println("Bouton recherche par notes cliqué");
+        this.resetErrorLabel();
         FilterCommand command = new FilterCommand();
 
         try {
@@ -193,17 +181,14 @@ public class MainPageController implements Initializable {
             List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
-        }  catch (StringInputException | NumberFormatException | SQLException e) {
+        }  catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
-            this.resetGradeFilterFields();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
 
     @FXML
     public void onSearchAgeButton(ActionEvent actionEvent) {
-        System.out.println("Bouton recherche par notes cliqué");
+        this.resetErrorLabel();
         FilterCommand command = new FilterCommand();
 
         try {
@@ -214,13 +199,11 @@ public class MainPageController implements Initializable {
             List<Student> studentList = filter
                     .getFilteredStudentList(command);
             this.updateStudentList(studentList);
-        } catch (StringInputException | NumberFormatException | SQLException e) {
+        } catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
-            this.resetAgeFilterFields();
-        } catch (Exception e) {
-            throw new RuntimeException(e);
         }
     }
+
 
     private void updateStudentList(List<Student> studentList) {
         ObservableList<Student> studentData = FXCollections.observableArrayList();
@@ -325,5 +308,9 @@ public class MainPageController implements Initializable {
     public void resetGradeFilterFields() {
         searchFilterMinGradeField.setText("");
         searchFilterMaxGradeField.setText("");
+    }
+
+    public void resetErrorLabel() {
+        mainPageErrorLabel.setText("");
     }
 }
