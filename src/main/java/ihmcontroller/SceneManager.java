@@ -1,5 +1,6 @@
 package ihmcontroller;
 
+import javafx.scene.text.Font;
 import utils.DatabaseConnection;
 import model.User;
 import javafx.fxml.FXMLLoader;
@@ -8,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class SceneManager {
     Stage applicationStage;
@@ -19,7 +21,6 @@ public class SceneManager {
 
     public SceneManager(Stage applicationStage) throws IOException {
         this.applicationStage = applicationStage;
-
         FXMLLoader mainLoader = new FXMLLoader(getClass().getResource(DatabaseConnection.DASHBOARD_PATH));
         Parent mainPageParent = mainLoader.load();
         this.mainPageController = mainLoader.getController();
@@ -31,6 +32,13 @@ public class SceneManager {
         LoginPageController loginPageController = loginLoader.getController();
         loginPageController.setManager(this);
         loginPageScene = new Scene(loginPageParent, 580, 420);
+//        URL cssUrl = getClass().getResource("/style/style.css");
+//        if (cssUrl != null) {
+            loginPageScene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
+//        } else {
+//            System.err.println("⚠️ Could not load CSS: /style/style.css");
+//        }
+//        loginPageScene.getStylesheets().add(getClass().getResource("/style/style.css").toExternalForm());
 
         FXMLLoader registerLoader = new FXMLLoader(getClass().getResource(DatabaseConnection.REGISTER_PATH));
         Parent registerPageParent = registerLoader.load();
