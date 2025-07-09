@@ -1,5 +1,6 @@
 package ihmcontroller;
 import DAO.FilterStudentDAO;
+import exceptions.DataException;
 import exceptions.FilterException;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
@@ -23,9 +24,10 @@ import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
 
-import static DAO.StudentDAO.deleteStudent;
-import static exceptions.ExceptionMessage.INVALID_INPUT;
+import static DAO.StudentDAO.*;
+import static exceptions.ExceptionMessage.*;
 import static searchfilter.FilterType.*;
+import static utils.DataUtils.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
@@ -120,7 +122,7 @@ public class MainPageController implements Initializable {
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterNameField.getText())
-                    && DataUtils.isNameValid(searchFilterNameField.getText())) {
+                    && isNameValid(searchFilterNameField.getText())) {
                 command.setSearchString(searchFilterNameField.getText());
                 command.setType(LASTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
@@ -148,7 +150,7 @@ public class MainPageController implements Initializable {
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterFirstNameField.getText())
-                    && DataUtils.isNameValid(searchFilterFirstNameField.getText())) {
+                    && isNameValid(searchFilterFirstNameField.getText())) {
                 command.setSearchString(searchFilterFirstNameField.getText());
                 command.setType(FIRSTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(command.getType());
