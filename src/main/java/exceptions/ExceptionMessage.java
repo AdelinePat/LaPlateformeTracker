@@ -2,6 +2,8 @@ package exceptions;
 
 public enum ExceptionMessage {
     LOGIN_ERROR("L'utilisateur n'a pas été trouvé"),
+    HASH_ERROR("Une erreur est survenue"),
+    REGISTER_ERROR("L'utilisateur n'a pas pu être créé"),
     MULTIPLE_USERS_FOUND("Une erreur est survenue plusieurs utilisateurs ont été trouvé"),
     USER_NOT_FOUND("L'utilisateur n'a pas été trouvéé"),
     USERDATA_NOT_FOUND("les données de cet utilisateur n'ont pas été trouvé"),

@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataUtils {
-    public static boolean isNameValid(String input) throws LoginException {
+    public static boolean isNameValid(String input) {
         String pattern = "^\\p{L}+$";
         return input.matches(pattern);
     }

@@ -135,7 +135,7 @@ public class MainPageController implements Initializable {
             }
             command.setSearchString(searchFilterNameField.getText());
             this.updateStudentList(studentList);
-        } catch (StringInputException | LoginException | FilterException e) {
+        } catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
         }
     }
@@ -163,7 +163,7 @@ public class MainPageController implements Initializable {
             }
             this.updateStudentList(studentList);
             this.resetErrorLabel();
-        } catch (StringInputException | LoginException | FilterException e) {
+        } catch (StringInputException | FilterException e) {
             mainPageErrorLabel.setText(e.getMessage());
         }
     }
