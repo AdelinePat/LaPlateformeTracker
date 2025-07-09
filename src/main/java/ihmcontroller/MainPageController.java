@@ -251,9 +251,21 @@ public class MainPageController implements Initializable {
     }
 
     @FXML void deleteStudentSelection(ActionEvent actionEvent) {
-        if  (selectedStudent != null) {
+        if (selectedStudent != null) {
             deleteStudent(selectedStudent);
             fillContent();
+        } else {
+            // display select a student error
+        }
+    }
+
+    @FXML void updateStudentSelection(ActionEvent actionEvent) {
+        if (selectedStudent != null) {
+            updateStudent(selectedStudent, enterStudentLastName.getText(), enterStudentFirstName.getText(),
+                    Integer.parseInt(enterStudentAge.getText()), Double.parseDouble(enterStudentGrade.getText()));
+            fillContent();
+        } else {
+            // display select a student error
         }
     }
 
