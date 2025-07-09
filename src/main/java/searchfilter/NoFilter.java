@@ -1,16 +1,17 @@
 package searchfilter;
 
 import DAO.FilterStudentDAO;
+import exceptions.FilterException;
 import model.Student;
 import java.util.List;
 import static exceptions.ExceptionMessage.INVALID_FILTER;
 
 public class NoFilter implements ISearchFilter {
-    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws Exception {
+    public List<Student> getFilteredStudentList(FilterCommand filterCommand) throws FilterException {
         if(FilterType.NOFILTER.equals(filterCommand.getType())){
                 return FilterStudentDAO.getInitialStudentList();
         } else {
-            throw new Exception(INVALID_FILTER.getMessage());
+            throw new FilterException(INVALID_FILTER.getMessage());
         }
     }
 

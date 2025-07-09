@@ -29,10 +29,7 @@ public class User {
         if(UserDAO.doesUserExist(this.userName)) {
             String salt = UserDAO.getSaltFromDatabase(this.userName);
             this.salt = new Salt(salt);
-//            byte[] salt = getSaltFromDatabase(this.userName);
             this.password = this.salt.hashPassword(this.password);
-
-            System.out.println("login after hashpassword : " + this.password);
             return UserDAO.doesPasswordMatch(this.userName, this.password);
         } else {
             throw new LoginException(USER_NOT_FOUND.getMessage());
