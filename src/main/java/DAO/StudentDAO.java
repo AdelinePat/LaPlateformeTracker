@@ -8,31 +8,40 @@ import java.sql.*;
 public class StudentDAO extends UserDAO {
 
     public static void addStudent(StudentObject student) {
-
-    }
-
-    public static void updateStudent(StudentObject student, String lastName, String firstName, int age, double grade) {
-        String query = "UPDATE student SET lastname = ?, firstname = ?, age = ?, average = ? " +
-                "WHERE id_student = ?";
-
-        System.out.println("Trying to update student: " +
-                student.getId() + " | " +
-                student.getLastname() + ", " +
-                student.getFirstname() + " | " +
-                student.getAge() + " ans | moyenne: " + student.getGrade()
-        );
+        String query = "INSERT INTO student (lastname, firstname, age, average) " +
+                "VALUES (?, ?, ?, ?)";
 
         try {
             Connection connection = DatabaseConnection.databaseOpenConnexion();
             PreparedStatement preparedStatement = connection.prepareStatement(query);
-            preparedStatement.setString(1, lastName);
-            preparedStatement.setString(2, firstName);
-            preparedStatement.setInt(3, age);
-            preparedStatement.setDouble(4, grade);
-            preparedStatement.setInt(5, student.getId());
+            preparedStatement.setString(1, student.getLastname());
+            preparedStatement.setString(2, student.getFirstname());
+            preparedStatement.setInt(3, student.getAge());
+            preparedStatement.setDouble(4, student.getGrade());
 
-            int rowsAffected = preparedStatement.executeUpdate();
-            System.out.println("Rows affected: " + rowsAffected);
+            preparedStatement.executeUpdate();
+            preparedStatement.close();
+            DatabaseConnection.databaseCloseConnexion();
+
+        } catch (SQLException e) {
+            System.out.println("Creation couldn't complete");
+        }
+    }
+
+    public static void updateStudent(StudentObject modifiedStudent) {
+        String query = "UPDATE student SET lastname = ?, firstname = ?, age = ?, average = ? " +
+                "WHERE id_student = ?";
+
+        try {
+            Connection connection = DatabaseConnection.databaseOpenConnexion();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setString(1, modifiedStudent.getLastname());
+            preparedStatement.setString(2, modifiedStudent.getFirstname());
+            preparedStatement.setInt(3, modifiedStudent.getAge());
+            preparedStatement.setDouble(4, modifiedStudent.getGrade());
+            preparedStatement.setInt(5, modifiedStudent.getId());
+
+            preparedStatement.executeUpdate();
             preparedStatement.close();
             DatabaseConnection.databaseCloseConnexion();
 

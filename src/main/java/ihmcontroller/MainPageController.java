@@ -24,8 +24,7 @@ import java.util.ResourceBundle;
 
 import searchfilter.FilterCommand;
 
-import static DAO.StudentDAO.deleteStudent;
-import static DAO.StudentDAO.updateStudent;
+import static DAO.StudentDAO.*;
 import static searchfilter.FilterType.*;
 
 public class MainPageController implements Initializable {
@@ -216,6 +215,18 @@ public class MainPageController implements Initializable {
         enterStudentGrade.setText("");
     }
 
+    @FXML void addStudentSelection(ActionEvent actionEvent) {
+        StudentObject newStudent = new StudentObject();
+//        try {
+            newStudent.setLastname(enterStudentLastName.getText());
+            newStudent.setFirstname(enterStudentFirstName.getText());
+            newStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
+            newStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+            addStudent(newStudent);
+            fillContent();
+//        }
+    }
+
     @FXML void deleteStudentSelection(ActionEvent actionEvent) {
         if (selectedStudent != null) {
             deleteStudent(selectedStudent);
@@ -227,8 +238,14 @@ public class MainPageController implements Initializable {
 
     @FXML void updateStudentSelection(ActionEvent actionEvent) {
         if (selectedStudent != null) {
-            updateStudent(selectedStudent, enterStudentLastName.getText(), enterStudentFirstName.getText(),
-                    Integer.parseInt(enterStudentAge.getText()), Double.parseDouble(enterStudentGrade.getText()));
+            StudentObject modifiedStudent = new StudentObject();
+            modifiedStudent.setId(selectedStudent.getId());
+            modifiedStudent.setLastname(enterStudentLastName.getText());
+            modifiedStudent.setFirstname(enterStudentFirstName.getText());
+            modifiedStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
+            modifiedStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+
+            updateStudent(modifiedStudent);
             fillContent();
         } else {
             // display select a student error
