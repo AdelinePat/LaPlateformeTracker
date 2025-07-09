@@ -1,6 +1,7 @@
 package ihmcontroller;
 
 //import SearchFilter.FirstnameFilter;
+import DAO.FilterStudentDAO;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
 import searchfilter.*;
@@ -24,6 +25,7 @@ import java.util.List;
 import java.util.ResourceBundle;
 
 import static DAO.StudentDAO.deleteStudent;
+import static exceptions.ExceptionMessage.INVALID_INPUT;
 import static searchfilter.FilterType.*;
 
 public class MainPageController implements Initializable {
@@ -101,8 +103,8 @@ public class MainPageController implements Initializable {
     }
 
     public void fillContent() {
-        NoFilter filter = new NoFilter();
-        List<Student> studentList = filter.getInitialStudentList();
+//        NoFilter filter = new NoFilter();
+        List<Student> studentList = FilterStudentDAO.getInitialStudentList();
         this.updateStudentList(studentList);
     }
 
@@ -131,7 +133,7 @@ public class MainPageController implements Initializable {
                 command.setType(NOFILTER);
                 studentList = filter.getFilteredStudentList(command);
             } else {
-                throw new StringInputException("Le prénom est invalide");
+                throw new StringInputException(INVALID_INPUT.getMessage());
             }
             command.setSearchString(searchFilterNameField.getText());
             this.updateStudentList(studentList);
@@ -161,7 +163,7 @@ public class MainPageController implements Initializable {
                 ISearchFilter filter = FilterFactory.createFilter(command.getType());
                 studentList = filter.getFilteredStudentList(command);
             } else {
-                throw new StringInputException("Le prénom est invalide");
+                throw new StringInputException(INVALID_INPUT.getMessage());
             }
             this.updateStudentList(studentList);
             mainPageErrorLabel.setText("");

@@ -12,6 +12,8 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
+import static exceptions.ExceptionMessage.INVALID_USERNAME;
+
 public class RegisterPageController {
     private SceneManager sceneManager;
 
@@ -30,7 +32,7 @@ public class RegisterPageController {
         try {
             if (!DataUtils.isNameValid(registerUserField.getText())
                     || DataUtils.isInputEmpty(registerUserField.getText())) {
-                throw new LoginException("Le nom d'utilisateur est invalide");
+                throw new LoginException(INVALID_USERNAME.getMessage());
             }
             user.setUserName(registerUserField.getText());
             user.setPassword(registerPassWordField.getText());

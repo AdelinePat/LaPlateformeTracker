@@ -2,6 +2,8 @@ package searchfilter;
 
 import exceptions.StringInputException;
 import utils.DataUtils;
+import static exceptions.ExceptionMessage.INVALID_INPUT_FLOAT;
+import static exceptions.ExceptionMessage.INVALID_INPUT_INTEGER;
 
 public class FilterCommand {
     private FilterType type;
@@ -17,22 +19,6 @@ public class FilterCommand {
 
     public void setSearchString(String searchString) {
         this.searchString = searchString;
-    }
-
-    public void setMinAgeValue(int minAgeValue) {
-        this.minAgeValue = minAgeValue;
-    }
-
-    public void setMaxAgeValue(int maxAgeValue) {
-        this.maxAgeValue = maxAgeValue;
-    }
-
-    public void setMinGradeValue(float minGradeValue) {
-        this.minGradeValue = minGradeValue;
-    }
-
-    public void setMaxGradeValue(float maxGradeValue) {
-        this.maxGradeValue = maxGradeValue;
     }
 
     public FilterType getType() {
@@ -67,22 +53,24 @@ public class FilterCommand {
     private void setMinAgeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputIntegerValid(value)) {
-            this.setMinAgeValue(Integer.parseInt(value));
+            this.minAgeValue = Integer.parseInt(value);
         } else if (DataUtils.isInputEmpty(value)) {
-            this.setMinAgeValue(0);
+            this.minAgeValue = 0;
+//            this.setMinAgeValue(0);
         } else {
-            throw new StringInputException("Le nombre entré est invalide : veuillez entrer un entier");
+            throw new StringInputException(INVALID_INPUT_INTEGER.getMessage());
         }
     }
 
     private void setMaxAgeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputIntegerValid(value)) {
-            this.setMaxAgeValue(Integer.parseInt(value));
+            this.maxAgeValue = Integer.parseInt(value);
         } else if (DataUtils.isInputEmpty(value)) {
-            this.setMaxAgeValue(99);
+            this.maxAgeValue = 99;
+//            this.setMaxAgeValue(99);
         } else {
-            throw new StringInputException("Le nombre entré est invalide : veuillez entrer un entier");
+            throw new StringInputException(INVALID_INPUT_INTEGER.getMessage());
         }
     }
 
@@ -94,22 +82,26 @@ public class FilterCommand {
     private void setMinGradeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputFloatValid(value)) {
-            this.setMinGradeValue(Float.parseFloat(value));
+            this.minGradeValue = Float.parseFloat(value);
+//            this.setMinGradeValue(Float.parseFloat(value));
         } else if (DataUtils.isInputEmpty(value)) {
-            this.setMinGradeValue(0);
+            this.minGradeValue = 0;
+//            this.setMinGradeValue(0);
         } else {
-            throw new StringInputException("Le nombre entré est invalide : veuillez entrer un nombre entier ou décimal");
+            throw new StringInputException(INVALID_INPUT_FLOAT.getMessage());
         }
     }
 
     private void setMaxGradeValue(String value) throws StringInputException {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputFloatValid(value)) {
-            this.setMaxGradeValue(Float.parseFloat(value));
+            this.maxGradeValue = Float.parseFloat(value);
+//            this.setMaxGradeValue(Float.parseFloat(value));
         } else if (DataUtils.isInputEmpty(value)) {
-            this.setMaxGradeValue(20);
+            this.maxGradeValue = 20;
+//            this.setMaxGradeValue(20);
         } else {
-            throw new StringInputException("Le nombre entré est invalide : veuillez entrer un nombre entier ou décimal");
+            throw new StringInputException(INVALID_INPUT_FLOAT.getMessage());
         }
     }
 

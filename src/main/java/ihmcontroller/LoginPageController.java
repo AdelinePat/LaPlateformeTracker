@@ -11,11 +11,14 @@ import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.sql.SQLException;
 
+import static exceptions.ExceptionMessage.INVALID_USERNAME;
+
 public class LoginPageController {
     private SceneManager sceneManager;
 
     @FXML
     private TextField loginUserField;
+
     @FXML
     private PasswordField loginPassWordField;
     public Label loginErrorLabel;
@@ -30,7 +33,7 @@ public class LoginPageController {
         try {
             if (!DataUtils.isNameValid(loginUserField.getText())
                     || DataUtils.isInputEmpty(loginUserField.getText())) {
-                throw new LoginException("Le nom d'utilisateur est invalide");
+                throw new LoginException(INVALID_USERNAME.getMessage());
             }
             user.setUserName(loginUserField.getText());
             user.setPassword((loginPassWordField.getText()));

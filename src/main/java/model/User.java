@@ -27,7 +27,7 @@ public class User {
 
     public boolean login() throws NoSuchAlgorithmException, InvalidKeySpecException, LoginException, SQLException {
         if(UserDAO.doesUserExist(this.userName)) {
-            String salt = getSaltFromDatabase(this.userName);
+            String salt = UserDAO.getSaltFromDatabase(this.userName);
             this.salt = new Salt(salt);
 //            byte[] salt = getSaltFromDatabase(this.userName);
             this.password = this.salt.hashPassword(this.password);
@@ -35,7 +35,7 @@ public class User {
             System.out.println("login after hashpassword : " + this.password);
             return UserDAO.doesPasswordMatch(this.userName, this.password);
         } else {
-            throw new LoginException("ce nom d'utilisateur n'a pas été trouvé");
+            throw new LoginException(USER_NOT_FOUND.getMessage());
         }
     }
 
@@ -55,25 +55,24 @@ public class User {
         return userName;
     }
 
-    private String getSaltFromDatabase(String userName) throws SQLException {
-        String query = "SELECT salt FROM staff WHERE username = ?";
-        Connection conn = DatabaseConnection.databaseOpenConnexion();
-        PreparedStatement ps = conn.prepareStatement(query);
-        ps.setString(1, userName); // match firstnames starting with input
-        StringBuilder salt = new StringBuilder();
-        ResultSet rs = ps.executeQuery();
-        if (rs.next()) {
-            salt.append(rs.getString(1));
-        } else {
-            throw new SQLException(USERDATA_NOT_FOUND.getMessage());
-        }
-        rs.close();
-        ps.close();
-        DatabaseConnection.databaseCloseConnexion();
-
-        return salt.toString();
-    }
-
+//    private String getSaltFromDatabase(String userName) throws SQLException {
+//        String query = "SELECT salt FROM staff WHERE username = ?";
+//        Connection conn = DatabaseConnection.databaseOpenConnexion();
+//        PreparedStatement ps = conn.prepareStatement(query);
+//        ps.setString(1, userName); // match firstnames starting with input
+//        StringBuilder salt = new StringBuilder();
+//        ResultSet rs = ps.executeQuery();
+//        if (rs.next()) {
+//            salt.append(rs.getString(1));
+//        } else {
+//            throw new SQLException(USERDATA_NOT_FOUND.getMessage());
+//        }
+//        rs.close();
+//        ps.close();
+//        DatabaseConnection.databaseCloseConnexion();
+//
+//        return salt.toString();
+//    }
 
     public boolean isRegexPasswordValid(String password) throws LoginException {
         String passwordRegex = "^(?=.*[A-Za-z])(?=.*\\d)(?=.*[@$!%*#?&_])[A-Za-z\\d@$!%*#?&]{10,}$";
@@ -102,21 +101,25 @@ public class User {
         return true;
     }
 
+    public String getReadableSalt() {
+        return this.salt.getReadableSalt();
+    }
+
     public void register() throws LoginException, NoSuchAlgorithmException, InvalidKeySpecException, SQLException {
         if(this.canRegister()){
-            String query = "INSERT INTO staff (username, password, salt) VALUES (?, ?, ?)";
+            UserDAO.createUser(this);
+//            String query = "INSERT INTO staff (username, password, salt) VALUES (?, ?, ?)";
 
-            Connection conn = DatabaseConnection.databaseOpenConnexion();
-            PreparedStatement ps = conn.prepareStatement(query);
-
-            ps.setString(1, this.getUserName());
-            ps.setString(2, this.getPassword());
-            ps.setString(3, this.salt.getReadableSalt());
-            ps.executeUpdate();
-
-            ps.close();
-            DatabaseConnection.databaseCloseConnexion();
-
+//            Connection conn = DatabaseConnection.databaseOpenConnexion();
+//            PreparedStatement ps = conn.prepareStatement(query);
+//
+//            ps.setString(1, this.getUserName());
+//            ps.setString(2, this.getPassword());
+//            ps.setString(3, this.salt.getReadableSalt());
+//            ps.executeUpdate();
+//
+//            ps.close();
+//            DatabaseConnection.databaseCloseConnexion();
         }
     }
 
