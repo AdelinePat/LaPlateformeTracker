@@ -30,7 +30,7 @@
             <Insets />
          </VBox.margin>
       </HBox>
-      <Label fx:id="mainPageErrorLabel" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="0.0" textAlignment="CENTER" textFill="RED" />
+      <Label fx:id="mainPageErrorLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="0.0" textAlignment="CENTER" textFill="RED" />
       <Accordion VBox.vgrow="NEVER">
         <panes>
           <TitledPane animated="false" text="Nom">
@@ -103,14 +103,13 @@
             </VBox>
             <VBox minWidth="85.0" spacing="10.0" HBox.hgrow="NEVER">
                <children>
-                  <Button id="openAgeGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphique des âges" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
-                  <Button id="openGradeGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphique des notes" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <Button id="openAgeGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
                   <Button id="exportSearchButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Exporter les résultats" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>
       </HBox>
-      <GridPane alignment="CENTER" hgap="6.0" vgap="2.0">
+      <GridPane alignment="CENTER" hgap="6.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" vgap="2.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -132,9 +131,9 @@
             <TextField fx:id="enterStudentAge" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
             <Label alignment="CENTER" prefHeight="25.0" text="Moyenne :" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
             <TextField fx:id="enterStudentGrade" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-            <Button onAction="#addStudentSelection" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="+ Ajouter" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button onAction="#updateStudentSelection" alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="/ Modifier" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
-            <Button onAction="#deleteStudentSelection" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="- Supprimer" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addStudentSelection" text="+ Ajouter" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateStudentSelection" text="/ Modifier" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteStudentSelection" text="- Supprimer" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
             <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearStudentSelection" text="Désélectionner" GridPane.columnIndex="4" />
          </children>
       </GridPane>
