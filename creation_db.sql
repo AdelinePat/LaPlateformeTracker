@@ -13,7 +13,7 @@ CREATE TABLE IF NOT EXISTS staff (
     username VARCHAR(255) UNIQUE,
     salt VARCHAR(255),
     password VARCHAR(255)
-)
+);
 
 CREATE TABLE IF NOT EXISTS project (
     id_project int NOT NULL PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
