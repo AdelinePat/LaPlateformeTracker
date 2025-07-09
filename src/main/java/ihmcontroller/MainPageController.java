@@ -2,6 +2,8 @@ package ihmcontroller;
 
 //import SearchFilter.FirstnameFilter;
 import DAO.FilterStudentDAO;
+import exceptions.DataException;
+import exceptions.ExceptionMessage;
 import exceptions.StringInputException;
 import javafx.scene.control.Label;
 import searchfilter.*;
@@ -27,7 +29,9 @@ import java.util.ResourceBundle;
 import searchfilter.FilterCommand;
 
 import static DAO.StudentDAO.*;
+import static exceptions.ExceptionMessage.*;
 import static searchfilter.FilterType.*;
+import static utils.DataUtils.*;
 
 public class MainPageController implements Initializable {
     private SceneManager sceneManager;
@@ -123,7 +127,7 @@ public class MainPageController implements Initializable {
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterNameField.getText())
-                    && DataUtils.isNameValid(searchFilterNameField.getText())) {
+                    && isNameValid(searchFilterNameField.getText())) {
                 command.setSearchString(searchFilterNameField.getText());
                 command.setType(LASTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(LASTNAME);
@@ -153,7 +157,7 @@ public class MainPageController implements Initializable {
 
         try {
             if (!DataUtils.isInputEmpty(searchFilterFirstNameField.getText())
-                    && DataUtils.isNameValid(searchFilterFirstNameField.getText())) {
+                    && isNameValid(searchFilterFirstNameField.getText())) {
                 command.setSearchString(searchFilterFirstNameField.getText());
                 command.setType(FIRSTNAME);
                 ISearchFilter filter = FilterFactory.createFilter(command.getType());
@@ -243,6 +247,10 @@ public class MainPageController implements Initializable {
 
     @FXML
     public void clearStudentSelection(ActionEvent actionEvent) {
+        clearStudentEntries();
+    }
+
+    private void clearStudentEntries() {
         selectedStudent = null;
         enterStudentLastName.setText("");
         enterStudentFirstName.setText("");
@@ -250,40 +258,62 @@ public class MainPageController implements Initializable {
         enterStudentGrade.setText("");
     }
 
-    @FXML void addStudentSelection(ActionEvent actionEvent) {
-        StudentObject newStudent = new Student();
-//        try {
-            newStudent.setLastname(enterStudentLastName.getText());
-            newStudent.setFirstname(enterStudentFirstName.getText());
-            newStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
-            newStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+    @FXML
+    public void addStudentSelection(ActionEvent actionEvent) {
+        Student newStudent = new Student();
+        try {
+            if (isNameValid(enterStudentLastName.getText()) &&
+                    isNameValid(enterStudentFirstName.getText()) &&
+                    isInputIntegerValid(enterStudentAge.getText()) &&
+                    isInputFloatValid(enterStudentGrade.getText())
+            ) {
+                newStudent.setLastname(enterStudentLastName.getText());
+                newStudent.setFirstname(enterStudentFirstName.getText());
+                newStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
+                newStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+            } else {
+                throw new DataException(INVALID_INPUTS.getMessage());
+            }
             addStudent(newStudent);
             fillContent();
-//        }
-    }
-
-    @FXML void deleteStudentSelection(ActionEvent actionEvent) {
-        if (selectedStudent != null) {
-            deleteStudent(selectedStudent);
-            fillContent();
-        } else {
-            // display select a student error
+        } catch (DataException e) {
+            mainPageErrorLabel.setText(e.getMessage());
         }
     }
 
-    @FXML void updateStudentSelection(ActionEvent actionEvent) {
-        if (selectedStudent != null) {
-            StudentObject modifiedStudent = new StudentObject();
-            modifiedStudent.setId(selectedStudent.getId());
-            modifiedStudent.setLastname(enterStudentLastName.getText());
-            modifiedStudent.setFirstname(enterStudentFirstName.getText());
-            modifiedStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
-            modifiedStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+    @FXML
+    public void deleteStudentSelection(ActionEvent actionEvent) {
+        try {
+            if (selectedStudent != null) {
+                deleteStudent(selectedStudent);
+                fillContent();
+            } else {
+                throw new DataException(STUDENT_NOT_SELECTED.getMessage());
+            }
+        } catch (DataException e) {
+            mainPageErrorLabel.setText(e.getMessage());
+        }
+    }
 
-            updateStudent(modifiedStudent);
-            fillContent();
-        } else {
-            // display select a student error
+    @FXML
+    public void updateStudentSelection(ActionEvent actionEvent) {
+        try {
+            if (selectedStudent != null) {
+                Student modifiedStudent = new Student();
+                modifiedStudent.setId(selectedStudent.getId());
+                modifiedStudent.setLastname(enterStudentLastName.getText());
+                modifiedStudent.setFirstname(enterStudentFirstName.getText());
+                modifiedStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
+                modifiedStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+
+                updateStudent(modifiedStudent);
+                fillContent();
+                clearStudentEntries();
+            } else {
+                throw new DataException(STUDENT_NOT_SELECTED.getMessage());
+            }
+        } catch (DataException e) {
+            mainPageErrorLabel.setText(e.getMessage());
         }
     }
 

@@ -13,7 +13,9 @@ public enum ExceptionMessage {
     INVALID_INPUT_INTEGER("Le nombre entré est invalide : veuillez entrer un entier"),
     INVALID_INPUT_FLOAT("Le nombre entré est invalide : veuillez entrer un nombre entier ou décimal"),
     INVALID_INPUT("Le champs est invalide"),
-    INVALID_FILTER("Le filtre appliqué n'est pas reconnu");
+    INVALID_INPUTS("Un ou plusieurs champs sont invalides"),
+    INVALID_FILTER("Le filtre appliqué n'est pas reconnu"),
+    STUDENT_NOT_SELECTED("Vous n'avez pas sélectionné d'étudiant");
 
     private ExceptionMessage(String message) {
         this.message = message;
