@@ -15,8 +15,8 @@ public class UserTest {
 
     @Test
     public void loginTest() throws NoSuchAlgorithmException, InvalidKeySpecException, SQLException, LoginException {
-        user.setUserName("toto");
-        user.setPassword("Abcd*123456");
+        user.setUserName("jolyne");
+        user.setPassword("Aaaaaaaaa1!");
         assertTrue(user.login());
     }
 

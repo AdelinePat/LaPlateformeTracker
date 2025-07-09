@@ -1,0 +1,160 @@
+package DAO;
+
+import model.Student;
+import utils.DatabaseConnection;
+
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+public class FilterStudentDAO {
+    public static List<Student> firstnameFilter(String firstname) {
+        List<Student> filteredList = new ArrayList<>();
+        String query = "SELECT * FROM student WHERE firstname ILIKE ?";
+
+        try {
+            Connection conn = DatabaseConnection.databaseOpenConnexion();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, firstname + "%"); // match firstnames starting with input
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDouble(5)
+                );
+                filteredList.add(student);
+                System.out.println(student.toString());
+            }
+
+            rs.close();
+            ps.close();
+            DatabaseConnection.databaseCloseConnexion();
+
+        } catch (SQLException e) {
+            System.out.println("SQL Error during name filtering: " + e.getMessage());
+        }
+        return filteredList;
+    }
+
+    public static List<Student> lastnameFilter(String lastname) {
+        List<Student> filteredList = new ArrayList<>();
+        String query = "SELECT * FROM student WHERE lastname ILIKE ?";
+
+        try {
+            Connection conn = DatabaseConnection.databaseOpenConnexion();
+            PreparedStatement ps = conn.prepareStatement(query);
+            ps.setString(1, lastname + "%"); // match firstnames starting with input
+
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Student student = new Student(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDouble(5)
+                );
+                filteredList.add(student);
+                System.out.println(student.toString());
+            }
+
+            rs.close();
+            ps.close();
+            DatabaseConnection.databaseCloseConnexion();
+
+        } catch (SQLException e) {
+            System.out.println("SQL Error during name filtering: " + e.getMessage());
+        }
+        return filteredList;
+    }
+
+    public static List<Student> getInitialStudentList() {
+        List<Student> myList = new ArrayList<>();
+        try {
+            Connection conn = DatabaseConnection.databaseOpenConnexion();
+            Statement st = conn.createStatement();
+            ResultSet rs = st.executeQuery("SELECT * FROM student");
+            while (rs.next()) {
+                Student student = new Student(
+                        rs.getInt(1),
+                        rs.getString(2),
+                        rs.getString(3),
+                        rs.getInt(4),
+                        rs.getDouble(5));
+                myList.add(student);
+                System.out.println(student.toString());
+
+            }
+            rs.close();
+            st.close();
+            DatabaseConnection.databaseCloseConnexion();
+
+        } catch (SQLException e) {
+            System.out.println("ça n'a pas marché");
+        }
+        return myList;
+    }
+
+
+    public static List<Student> ageFilter(int min, int max) throws SQLException, NumberFormatException{
+        System.out.println("Inside RangeFilter : ageFilter");
+
+        List<Student> filteredList = new ArrayList<>();
+        String query = "SELECT * FROM student WHERE age BETWEEN ? AND ?";
+
+        System.out.println("Inside ageFilter : " + query);
+
+        Connection conn = DatabaseConnection.databaseOpenConnexion();
+        PreparedStatement ps = conn.prepareStatement(query);
+        ps.setInt(1, min);
+        ps.setInt(2, max);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Student student = new Student(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getDouble(5)
+            );
+            filteredList.add(student);
+            System.out.println(student.toString());
+        }
+        rs.close();
+        ps.close();
+        DatabaseConnection.databaseCloseConnexion();
+
+        return filteredList;
+    }
+
+    public static List<Student> gradeFilter(float min, float max) throws SQLException, NumberFormatException {
+        List<Student> filteredList = new ArrayList<>();
+        String query = "SELECT * FROM student WHERE average BETWEEN ? AND ?";
+        Connection conn = DatabaseConnection.databaseOpenConnexion();
+        PreparedStatement ps = conn.prepareStatement(query);
+        System.out.println("ps : " + ps);
+        ps.setFloat(1, min);
+        ps.setFloat(2, max);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            Student student = new Student(
+                    rs.getInt(1),
+                    rs.getString(2),
+                    rs.getString(3),
+                    rs.getInt(4),
+                    rs.getDouble(5)
+            );
+            filteredList.add(student);
+            System.out.println(student.toString());
+        }
+        rs.close();
+        ps.close();
+        DatabaseConnection.databaseCloseConnexion();
+
+        return filteredList;
+    }
+}
