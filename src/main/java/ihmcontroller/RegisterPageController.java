@@ -25,6 +25,12 @@ public class RegisterPageController {
         this.sceneManager = sceneManager;
     }
 
+    @FXML
+    private Label titleOfPage;
+
+    public void initialize() {
+        System.out.println(titleOfPage.getStyleClass());
+    }
 
     @FXML
     public void onRegisterButtonClicked(javafx.event.ActionEvent actionEvent)  {

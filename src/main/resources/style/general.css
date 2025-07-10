@@ -3,9 +3,16 @@
     -fx-font-family: "Leelawadee UI", sans-serif;
 }
 
-.title {
-    -fx-font-size: 26;
-    -fx-font-weight: bold;
+.titleOfPage {
+    -fx-font-size: 20 !important;
+    -fx-text-fill: #55959f !important;
+    -fx-font-weight: bold !important;
+}
+
+.titleUserName {
+    -fx-font-size: 26 !important;
+    -fx-text-fill: #99E6F3 !important;
+    -fx-font-weight: bold !important;
 }
 
 .label {

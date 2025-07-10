@@ -8,6 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
+<?import java.lang.String?>
 <VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="420.0" prefWidth="580.0" spacing="20.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihmcontroller.LoginPageController" styleClass="root" stylesheets="@style/general.css,@style/loginRegister.css">
    <padding>
       <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
@@ -20,9 +21,12 @@
 <!--      </Label>-->
       <VBox alignment="CENTER" prefHeight="45.0" prefWidth="540.0" spacing="5.0">
          <children>
-            <Label styleClass="title" text="Connexion au service">
+            <Label fx:id="titleOfPage" text="Connexion au service">
+                <styleClass>
+                    <String fx:value="titleOfPage"/>
+                </styleClass>
 <!--               <font>-->
-<!--                  <Font name="Leelawadee UI" size="12.0" />-->
+<!--                  <Font name="Leelawadee UI"  size="26.0" />-->
 <!--               </font>-->
             </Label>
             <Label fx:id="loginErrorLabel" contentDisplay="CENTER" prefHeight="18.0" prefWidth="419.0" textAlignment="CENTER" textFill="RED" />

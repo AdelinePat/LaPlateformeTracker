@@ -19,6 +19,13 @@ public class LoginPageController {
     @FXML
     private PasswordField loginPassWordField;
     public Label loginErrorLabel;
+    @FXML
+    private Label titleOfPage;
+
+    public void initialize() {
+        System.out.println(titleOfPage.getStyleClass());
+        System.out.println("Style classes on label: " + titleOfPage.getStyleClass());
+    }
 
     public void setManager(SceneManager sceneManager) {
         this.sceneManager = sceneManager;
@@ -36,6 +43,7 @@ public class LoginPageController {
             user.setPassword((loginPassWordField.getText()));
             if (user.login()) {
                 this.resetAllFields();
+                System.out.println("Dans loginpagecontroller : " + user.getUserName());
                 sceneManager.switchToMainPage(user);
             }
         } catch (LoginException e) {

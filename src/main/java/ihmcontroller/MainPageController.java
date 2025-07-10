@@ -33,6 +33,17 @@ public class MainPageController implements Initializable {
     private SceneManager sceneManager;
     private User user;
 
+    @FXML
+    private Label titleOfPage;
+
+    @FXML
+    public Label titleUserName;
+
+    public void initialize() {
+        System.out.println(titleUserName.getStyleClass());
+        titleUserName.setText(user.getUserName());
+    }
+
     public void setUser(User user) {
         this.user = user;
     }
@@ -42,6 +53,9 @@ public class MainPageController implements Initializable {
         this.sceneManager = sceneManager;
     }
 
+    public void setLabelUserName(String username) {
+        titleUserName.setText(username);
+    }
     @FXML
     private Label mainPageErrorLabel;
 

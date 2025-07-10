@@ -59,6 +59,8 @@ public class SceneManager {
         applicationStage.setTitle("Plateforme Tracker - Dashboard");
         this.mainPageController.fillContent();
         this.mainPageController.setUser(user);
+//        this.mainPageController.titleUserName.setText(user.getUserName());
+        this.mainPageController.setLabelUserName(user.getUserName().toUpperCase());
     }
 
     public void switchToRegisterPage() {
