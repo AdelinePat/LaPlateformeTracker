@@ -9,20 +9,36 @@
 }
 
 /* Bar color for second series*/
-/*.default-color1.chart-bar {*/
-/*    -fx-bar-fill: #99E6F3;*/
-/*}*/
+.default-color1.chart-bar {
+    -fx-bar-fill: #99E6F3;
+}
 
 /* Optional: Remove bar stroke (border) */
 .chart-bar {
     -fx-stroke: transparent;
 }
 
-/* Optional: Change axis and label text color */
-.chart-legend-item-symbol {
+.chart-title, .axis-label, .axis {
+    -fx-text-fill: #5E6472;
+}
+
+
+/* Bar color for first series */
+.chart-bar .default-color0.chart-bar {
+    -fx-bar-fill: #FB8C83; /* pinkish */
+}
+
+/* Legend symbol color for first series */
+.default-color0.chart-legend-item-symbol {
     -fx-background-color: #FB8C83;
 }
 
-.chart-title, .axis-label, .axis {
-    -fx-text-fill: #5E6472;
+/* Bar color for second series (if you use more than one series) */
+.chart-bar .default-color1.chart-bar {
+    -fx-bar-fill: #99E6F3; /* light blue */
+}
+
+/* Legend symbol color for second series */
+.default-color1.chart-legend-item-symbol {
+    -fx-background-color: #99E6F3;
 }
