@@ -97,10 +97,8 @@ public class FilterCommand {
         if (!DataUtils.isInputEmpty(value)
                 && DataUtils.isInputFloatValid(value)) {
             this.minGradeValue = Float.parseFloat(value);
-//            this.setMinGradeValue(Float.parseFloat(value));
         } else if (DataUtils.isInputEmpty(value)) {
             this.minGradeValue = 0;
-//            this.setMinGradeValue(0);
         } else {
             throw new StringInputException(INVALID_INPUT_FLOAT.getMessage());
         }
@@ -111,16 +109,10 @@ public class FilterCommand {
                 && DataUtils.isInputFloatValid(value)) {
 
             this.maxGradeValue = Float.parseFloat(value);
-//            this.setMaxGradeValue(Float.parseFloat(value));
         } else if (DataUtils.isInputEmpty(value)) {
             this.maxGradeValue = 20;
-//            this.setMaxGradeValue(20);
         } else {
             throw new StringInputException(INVALID_INPUT_FLOAT.getMessage());
         }
-
-
     }
-
-
 }
