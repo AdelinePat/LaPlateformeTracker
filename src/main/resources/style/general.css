@@ -1,0 +1,26 @@
+.root {
+    -fx-background-color: linear-gradient(to bottom, #F2FDFF, #AEDDDD);
+    -fx-font-family: "Leelawadee UI", sans-serif;
+}
+
+.title {
+    -fx-font-size: 26;
+    -fx-font-weight: bold;
+}
+
+.label {
+    -fx-text-fill: #5E6472;
+    -fx-font-size: 10;
+}
+
+.button {
+    -fx-background-color: #FB8C83;
+    -fx-text-fill: #FAF3DD;
+    -fx-background-radius: 8;
+    -fx-cursor: hand;
+}
+
+.button:hover {
+    -fx-background-color: #99E6F3;
+    -fx-text-fill: #679B9B;
+}
