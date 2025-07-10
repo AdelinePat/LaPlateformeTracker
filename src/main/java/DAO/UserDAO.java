@@ -67,7 +67,7 @@ public class UserDAO {
                 default:
                     rs.close();
                     ps.close();
-                    throw new LoginException(USER_NOT_FOUND.getMessage());
+                    throw new LoginException(LOGIN_ERROR.getMessage());
             }
         }
         rs.close();

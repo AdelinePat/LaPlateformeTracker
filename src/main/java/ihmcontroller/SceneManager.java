@@ -24,6 +24,7 @@ public class SceneManager {
         this.mainPageController = mainLoader.getController();
         mainPageController.setManager(this);
         mainPageScene = new Scene(mainPageParent, 800, 600);
+
         mainPageScene.getStylesheets().add(getClass().getResource("/style/general.css").toExternalForm());
         mainPageScene.getStylesheets().add(getClass().getResource("/style/mainPage.css").toExternalForm());
 

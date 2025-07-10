@@ -1,13 +1,13 @@
 package exceptions;
 
 public enum ExceptionMessage {
-    LOGIN_ERROR("L'utilisateur n'a pas été trouvé"),
+    LOGIN_ERROR("Le nom d'utilisateur ou mot de passe est incorrect."),
     HASH_ERROR("Une erreur est survenue"),
     REGISTER_ERROR("L'utilisateur n'a pas pu être créé"),
     MULTIPLE_USERS_FOUND("Une erreur est survenue plusieurs utilisateurs ont été trouvé"),
     USER_NOT_FOUND("L'utilisateur n'a pas été trouvé"),
-    USERDATA_NOT_FOUND("les données de cet utilisateur n'ont pas été trouvé"),
-    USER_ALREADY_EXISTS("cet utilisateur existe déjà"),
+    USERDATA_NOT_FOUND("Les données de cet utilisateur n'ont pas été trouvé"),
+    USER_ALREADY_EXISTS("Cet utilisateur existe déjà"),
     INVALID_USERNAME("Le nom d'utilisateur est invalide"),
     INVALID_PASSWORD("Le mot de passe doit contenir au moins une minuscule, " +
             "une majuscule et un caractère spécial (@$!%*#?&) " +
