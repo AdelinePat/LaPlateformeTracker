@@ -110,7 +110,7 @@
             <VBox minWidth="85.0" spacing="10.0" HBox.hgrow="NEVER">
                <children>
                   <Button onAction="#openGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
-                  <Button id="exportSearchButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Exporter les résultats" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <Button onAction="#exportTableDataButton" id="exportSearchButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Exporter les résultats" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
                </children>
             </VBox>
          </children>

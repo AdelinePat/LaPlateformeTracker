@@ -20,7 +20,8 @@ public enum ExceptionMessage {
     NO_RESULT("Aucun résultat n'a été trouvé avec ce filtre"),
     SQL_ERROR("Une erreur est survenue"),
     SQL_FORMAT_ERROR("Le format n'est pas convertible en format numérique"),
-    STUDENT_NOT_SELECTED("Vous n'avez pas sélectionné d'étudiant");
+    STUDENT_NOT_SELECTED("Vous n'avez pas sélectionné d'étudiant"),
+    EXPORT_ERROR("Une erreur d'export est survenue");
 
     private ExceptionMessage(String message) {
         this.message = message;

@@ -20,6 +20,7 @@ import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 
 import javax.security.auth.login.LoginException;
+import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -27,6 +28,7 @@ import java.util.ResourceBundle;
 import static DAO.StudentDAO.*;
 import static exceptions.ExceptionMessage.*;
 import static searchfilter.FilterType.*;
+import static utils.DataExporter.exportToExcel;
 import static utils.DataUtils.*;
 
 public class MainPageController implements Initializable {
@@ -341,5 +343,13 @@ public class MainPageController implements Initializable {
 
     public void openGraphButton(ActionEvent actionEvent) {
         sceneManager.initGraphPage();
+    }
+
+    public void exportTableDataButton(ActionEvent actionEvent) {
+        try {
+            exportToExcel(studentsTable);
+        } catch (DataException e) {
+            mainPageErrorLabel.setText(e.getMessage());
+        }
     }
 }
