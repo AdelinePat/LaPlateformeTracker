@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 
 import java.util.List;
 
+import static DAO.GraphDAO.getRangeAgeValue;
 import static DAO.GraphDAO.getRangeValue;
 
 public class GraphPageController {
@@ -30,7 +31,7 @@ public class GraphPageController {
         System.out.println("Style classes on label: " + titleOfPage.getStyleClass());
     }
 
-    public void graphUpdate() {
+    public void gradeGraphUpdate() {
         barChart.getData().clear();
         Axis xAxis = barChart.getXAxis();
         xAxis.setLabel("Groupes de moyennes");
@@ -54,7 +55,35 @@ public class GraphPageController {
         barChart.getData().add(gradeSeries);
     }
 
-    public void switchToAgeGaphButton(ActionEvent actionEvent) {
+    public void ageGraphUpdate() {
+        barChart.getData().clear();
+        Axis xAxis = barChart.getXAxis();
+        xAxis.setLabel("Tranches d'âge");
+        Axis yAxis = barChart.getYAxis();
+        yAxis.setLabel("Nombre d'étudiants");
 
+        XYChart.Series<String, Number> gradeSeries = new XYChart.Series<>();
+        gradeSeries.setName("Âge");
+
+        int valueMin = 15;
+        int valueMax = 20;
+        for (int bar = 0; bar < 8; bar++) {
+            String title = valueMin + " - " + valueMax;
+            int value = getRangeAgeValue(valueMin, valueMax);
+            gradeSeries.getData().add(new XYChart.Data<>(title, value));
+
+            valueMin += 5;
+            valueMax += 5;
+        }
+
+        barChart.getData().add(gradeSeries);
+    }
+
+    public void switchToAgeGaphButton(ActionEvent actionEvent) {
+        ageGraphUpdate();
+    }
+
+    public void switchToGradeGaphButton(ActionEvent actionEvent) {
+        gradeGraphUpdate();
     }
 }

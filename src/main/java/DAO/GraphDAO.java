@@ -30,4 +30,23 @@ public class GraphDAO {
             throw new DataException(SQL_ERROR.getMessage());
         }
     }
+
+    public static int getRangeAgeValue(int valueMin, int valueMax) throws DataException {
+        String query = "SELECT COUNT(id_student) FROM student WHERE age BETWEEN ? AND ?";
+
+        try {
+            Connection connection = DatabaseConnection.databaseOpenConnexion();
+            PreparedStatement preparedStatement = connection.prepareStatement(query);
+            preparedStatement.setInt(1, valueMin);
+            preparedStatement.setInt(2, valueMax);
+
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            resultSet.next();
+            return resultSet.getInt(1);
+
+        } catch (SQLException e) {
+            throw new DataException(SQL_ERROR.getMessage());
+        }
+    }
 }

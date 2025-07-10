@@ -89,13 +89,13 @@ public class SceneManager {
         graphStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/app_icon.ico")));
         graphStage.setTitle("Plateforme Tracker - Graphiques");
         graphStage.setScene(gradeGraphPageScene);
-        gradeGraphController.graphUpdate();
+        gradeGraphController.gradeGraphUpdate();
         graphStage.show();
     }
 
     public void switchToGradeGraphPage() {
         graphStage.setScene(gradeGraphPageScene);
-        gradeGraphController.graphUpdate();
+        gradeGraphController.gradeGraphUpdate();
         graphStage.show();
     }
 

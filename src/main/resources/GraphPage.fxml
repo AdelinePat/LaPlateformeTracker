@@ -37,8 +37,8 @@
       <Separator prefWidth="200.0" />
       <HBox alignment="CENTER" minHeight="-Infinity" prefHeight="50.0" prefWidth="200.0" spacing="20.0">
          <children>
-            <Button id="openAgeGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques des notes" textAlignment="CENTER" wrapText="true" />
-            <Button id="openAgeGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques des âges" textAlignment="CENTER" wrapText="true" />
+            <Button id="openAgeGraphButton" onAction="#switchToGradeGaphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques des notes" textAlignment="CENTER" wrapText="true" />
+            <Button id="openAgeGraphButton" onAction="#switchToAgeGaphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques des âges" textAlignment="CENTER" wrapText="true" />
          </children>
       </HBox>
    </children>
