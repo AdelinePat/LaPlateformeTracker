@@ -1,0 +1,56 @@
+/* login-loginRegister.css */
+/*:root {*/
+/*    --main-bg-color: #AEDDDD;*/
+/*    --secondary-bg-color: #F2FDFF;*/
+/*    --text-field-bg: #FFFDF6;*/
+/*    --main-text-color: #5E6472;*/
+/*    --warning-text-color: #BC3E32;*/
+/*    --dark-text-color: #82312A;*/
+/*    --flashy-blue: #99E6F3;*/
+/*    --green-blue: #679B9B;*/
+/*    --pinky-peach: #FB8C83;*/
+/*    --very-light-yellow: #FAF3DD;*/
+/*    --light-yellow: #FCEBB4;*/
+/*}*/
+
+.root {
+    -fx-font-size: 12;
+}
+
+#loginErrorLabel, #registerErrorLabel {
+    -fx-text-fill: #BC3E32;
+    /*-fx-font-style: ;*/
+    -fx-font-weight: bold;
+    -fx-alignment: center;
+    -fx-font-size: 12;
+}
+
+#loginConfirmButton:hover, #accessRegisterButton:hover, #registerConfirmButton:hover {
+    -fx-background-color: #99E6F3;
+    -fx-text-fill: #679B9B;
+}
+
+
+#loginConfirmButton, #registerConfirmButton {
+    -fx-font-weight: bold;
+}
+
+#accessRegisterButton {
+    -fx-background-color: #FCEBB4;
+    -fx-text-fill: #BC3E32;
+    -fx-background-radius: 8;
+}
+
+.text-field, .password-field {
+    -fx-background-color: #FFFDF6;
+    -fx-border-color: #5E6472;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 5 10;
+    -fx-font-size: 12;
+}
+
+.button {
+    -fx-padding: 4 8;
+    -fx-font-size: 12 !important;
+}
