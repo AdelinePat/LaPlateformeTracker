@@ -1,0 +1,28 @@
+.button {
+    -fx-font-weight: bold;
+    -fx-padding: 4 8;
+}
+
+/* Bar color for first series */
+.default-color0.chart-bar {
+    -fx-bar-fill: #f69891;
+}
+
+/* Bar color for second series*/
+/*.default-color1.chart-bar {*/
+/*    -fx-bar-fill: #99E6F3;*/
+/*}*/
+
+/* Optional: Remove bar stroke (border) */
+.chart-bar {
+    -fx-stroke: transparent;
+}
+
+/* Optional: Change axis and label text color */
+.chart-legend-item-symbol {
+    -fx-background-color: #FB8C83;
+}
+
+.chart-title, .axis-label, .axis {
+    -fx-text-fill: #5E6472;
+}

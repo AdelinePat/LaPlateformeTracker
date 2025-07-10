@@ -51,11 +51,6 @@
 }
 
 .button {
-    -fx-padding: 8 16;
-    -fx-font-size: 12;
+    -fx-padding: 4 8;
+    -fx-font-size: 12 !important;
 }
-
-/*.button:hover {*/
-/*    -fx-background-color: #99E6F3;*/
-/*    -fx-text-fill: #679B9B;*/
-/*}*/

@@ -21,8 +21,9 @@
 }
 
 .button {
-    -fx-background-color: #FB8C83;
-    -fx-text-fill: #FAF3DD;
+    -fx-background-color: #f69891;
+    -fx-text-fill: #a5544f;
+    -fx-font-size: 12 !important;
     -fx-background-radius: 8;
     -fx-cursor: hand;
 }

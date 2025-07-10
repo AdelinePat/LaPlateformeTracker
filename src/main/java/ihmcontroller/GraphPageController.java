@@ -22,6 +22,14 @@ public class GraphPageController {
     @FXML
     private BarChart<String, Number> barChart;
 
+    @FXML
+    private Label titleOfPage;
+
+    public void initialize() {
+        System.out.println(titleOfPage.getStyleClass());
+        System.out.println("Style classes on label: " + titleOfPage.getStyleClass());
+    }
+
     public void graphUpdate() {
         barChart.getData().clear();
         Axis xAxis = barChart.getXAxis();

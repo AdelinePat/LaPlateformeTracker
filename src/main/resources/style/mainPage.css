@@ -1,10 +1,11 @@
 .root {
-    fx-font-size: 10 !important;
+    fx-font-size: 11 !important;
 }
 
 .button {
-    -fx-font-size: 10;
-    -fx-padding: 4 8;
+    -fx-font-size: 12 !important;
+    -fx-padding: 2 4;
+    -fx-font-weight: bold;
 }
 
 .table-view .column-header,
@@ -12,16 +13,7 @@
     -fx-size: 28; /* header height */
 }
 
-/*.table-view .table-row-cell {*/
-/*    -fx-cell-size: 26;  !* row height *!*/
-/*    !*-fx-background-color: #F2FDFF;*!*/
-/*    -fx-background-color: transparent;*/
-/*    -fx-border-color: transparent;*/
-/*    -fx-text-fill: red;*/
-/*}*/
-
 .table-view .table-row-cell:odd {
-    /*-fx-background-color: #baf1fa;*/
     -fx-background-color: #E4FBFF;
 }
 
@@ -45,13 +37,12 @@
 .table-view .column-header .label {
     -fx-text-fill: #272d39;
     -fx-font-weight: bold;
-    -fx-alignment: CENTER; /* optional: center the text */
+    -fx-alignment: CENTER;
 }
 
 .table-view {
     -fx-font-size: 10;
     -fx-table-cell-border-color: transparent;
-    /*-fx-background-color: #679B9B;*/
     -fx-background-color: #F2FDFF;
     -fx-text-fill: #272d39;
 }
@@ -66,18 +57,16 @@
     -fx-font-size: 13;
     -fx-start-margin: 8;
     -fx-margin: 4 8;
-    /*-fx-text-fill: #5E6472;*/
 }
 
 .titled-pane > *.content {
-    -fx-background-color: #E4FBFF; /* or your desired color E4FBFF*/
-    -fx-padding: 4 8; /* optional, to add some spacing inside */
+    -fx-background-color: #E4FBFF;
+    -fx-padding: 4 8;
 }
 
 
 .table-view .table-row-cell:filled:selected {
     -fx-background-color: #FFF2F0;
     -fx-text-fill: #6C584C;
-    /*-fx-text-fill: #5E6472;*/
     -fx-border-color: transparent;
 }

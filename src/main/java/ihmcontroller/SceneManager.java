@@ -1,5 +1,6 @@
 package ihmcontroller;
 
+import javafx.scene.image.Image;
 import utils.DatabaseConnection;
 import model.User;
 import javafx.fxml.FXMLLoader;
@@ -56,6 +57,9 @@ public class SceneManager {
         this.gradeGraphController = gradeGraphLoader.getController();
         gradeGraphController.setManager(this);
         gradeGraphPageScene = new Scene(gradeGraphPageParent, 420, 420);
+        gradeGraphPageScene.getStylesheets().add(getClass().getResource("/style/general.css").toExternalForm());
+        gradeGraphPageScene.getStylesheets().add(getClass().getResource("/style/graphPage.css").toExternalForm());
+
     }
 
     public void switchToLoginPage() {
@@ -82,6 +86,7 @@ public class SceneManager {
             graphStage.close();
         }
         this.graphStage = new Stage();
+        graphStage.getIcons().add(new Image(getClass().getResourceAsStream("/icons/app_icon.ico")));
         graphStage.setTitle("Plateforme Tracker - Graphiques");
         graphStage.setScene(gradeGraphPageScene);
         gradeGraphController.graphUpdate();
