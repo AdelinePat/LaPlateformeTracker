@@ -284,16 +284,25 @@ public class MainPageController implements Initializable {
     public void updateStudentSelection(ActionEvent actionEvent) {
         try {
             if (selectedStudent != null) {
-                Student modifiedStudent = new Student();
-                modifiedStudent.setId(selectedStudent.getId());
-                modifiedStudent.setLastname(enterStudentLastName.getText());
-                modifiedStudent.setFirstname(enterStudentFirstName.getText());
-                modifiedStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
-                modifiedStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
+                if (isNameValid(enterStudentLastName.getText()) &&
+                        isNameValid(enterStudentFirstName.getText()) &&
+                        isInputIntegerValid(enterStudentAge.getText()) &&
+                        isInputFloatValid(enterStudentGrade.getText())
+                ) {
+                    Student modifiedStudent = new Student();
+                    modifiedStudent.setId(selectedStudent.getId());
+                    modifiedStudent.setLastname(enterStudentLastName.getText());
+                    modifiedStudent.setFirstname(enterStudentFirstName.getText());
+                    modifiedStudent.setAge(Integer.parseInt(enterStudentAge.getText()));
+                    modifiedStudent.setGrade(Double.parseDouble(enterStudentGrade.getText()));
 
-                updateStudent(modifiedStudent);
-                fillContent();
-                clearStudentEntries();
+                    updateStudent(modifiedStudent);
+                    fillContent();
+                    clearStudentEntries();
+                }
+                else {
+                    throw new DataException(INVALID_INPUTS.getMessage());
+                }
             } else {
                 throw new DataException(STUDENT_NOT_SELECTED.getMessage());
             }
@@ -314,5 +323,9 @@ public class MainPageController implements Initializable {
 
     public void resetErrorLabel() {
         mainPageErrorLabel.setText("");
+    }
+
+    public void openGraphButton(ActionEvent actionEvent) {
+        sceneManager.initGraphPage();
     }
 }

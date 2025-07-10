@@ -1,13 +1,16 @@
 package DAO;
 
+import exceptions.DataException;
 import utils.DatabaseConnection;
 import model.Student;
 
 import java.sql.*;
 
+import static exceptions.ExceptionMessage.SQL_ERROR;
+
 public class StudentDAO extends UserDAO {
 
-    public static void addStudent(Student student) {
+    public static void addStudent(Student student) throws DataException {
         String query = "INSERT INTO student (lastname, firstname, age, average) " +
                 "VALUES (?, ?, ?, ?)";
 
@@ -24,11 +27,11 @@ public class StudentDAO extends UserDAO {
             DatabaseConnection.databaseCloseConnexion();
 
         } catch (SQLException e) {
-            System.out.println("Creation couldn't complete");
+            throw new DataException(SQL_ERROR.getMessage());
         }
     }
 
-    public static void updateStudent(Student modifiedStudent) {
+    public static void updateStudent(Student modifiedStudent) throws DataException {
         String query = "UPDATE student SET lastname = ?, firstname = ?, age = ?, average = ? " +
                 "WHERE id_student = ?";
 
@@ -46,11 +49,11 @@ public class StudentDAO extends UserDAO {
             DatabaseConnection.databaseCloseConnexion();
 
         } catch (SQLException e) {
-            System.out.println("Update couldn't complete");
+            throw new DataException(SQL_ERROR.getMessage());
         }
     }
 
-    public static void deleteStudent(Student student) {
+    public static void deleteStudent(Student student) throws DataException {
         String query = "DELETE FROM student WHERE id_student = ?";
 
         try {
@@ -61,7 +64,7 @@ public class StudentDAO extends UserDAO {
             preparedStatement.close();
             DatabaseConnection.databaseCloseConnexion();
         } catch (SQLException e) {
-            System.out.println("ça n'a pas marché");
+            throw new DataException(SQL_ERROR.getMessage());
         }
     }
 }

@@ -87,7 +87,7 @@ public class FilterStudentDAO {
         try {
             Connection conn = DatabaseConnection.databaseOpenConnexion();
             Statement st = conn.createStatement();
-            ResultSet rs = st.executeQuery("SELECT * FROM student");
+            ResultSet rs = st.executeQuery("SELECT * FROM student ORDER BY id_student ASC");
             while (rs.next()) {
                 Student student = new Student(
                         rs.getInt(1),
