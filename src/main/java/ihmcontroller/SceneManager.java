@@ -11,11 +11,14 @@ import java.io.IOException;
 
 public class SceneManager {
     Stage applicationStage;
+    Stage graphStage = null;
 
     Scene mainPageScene;
-    Scene loginPageScene;
     private final MainPageController mainPageController;
+    Scene loginPageScene;
     Scene registerPageScene;
+    Scene gradeGraphPageScene;
+    private final GraphPageController gradeGraphController;
 
     public SceneManager(Stage applicationStage) throws IOException {
         this.applicationStage = applicationStage;
@@ -47,6 +50,12 @@ public class SceneManager {
         RegisterPageController registerPageController = registerLoader.getController();
         registerPageController.setManager(this);
         registerPageScene = new Scene(registerPageParent, 580, 420);
+
+        FXMLLoader gradeGraphLoader = new FXMLLoader(getClass().getResource((DatabaseConnection.GRADEGRAPH_PATH)));
+        Parent gradeGraphPageParent = gradeGraphLoader.load();
+        this.gradeGraphController = gradeGraphLoader.getController();
+        gradeGraphController.setManager(this);
+        gradeGraphPageScene = new Scene(gradeGraphPageParent, 420, 420);
     }
 
     public void switchToLoginPage() {
@@ -66,5 +75,26 @@ public class SceneManager {
     public void switchToRegisterPage() {
         applicationStage.setScene(registerPageScene);
         applicationStage.setTitle("Plateforme Tracker - Connexion");
+    }
+
+    public void initGraphPage() {
+        if (graphStage != null) {
+            graphStage.close();
+        }
+        this.graphStage = new Stage();
+        graphStage.setTitle("Plateforme Tracker - Graphiques");
+        graphStage.setScene(gradeGraphPageScene);
+        gradeGraphController.graphUpdate();
+        graphStage.show();
+    }
+
+    public void switchToGradeGraphPage() {
+        graphStage.setScene(gradeGraphPageScene);
+        gradeGraphController.graphUpdate();
+        graphStage.show();
+    }
+
+    public void switchToAgeGraphPage() {
+
     }
 }
