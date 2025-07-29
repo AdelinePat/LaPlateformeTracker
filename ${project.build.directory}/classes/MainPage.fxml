@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Accordion?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<?import java.lang.String?>
+<VBox alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="723.0" prefWidth="757.0" spacing="10.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ihmcontroller.MainPageController" styleClass="root" stylesheets="@style/general.css,@style/mainPage.css">
+   <children>
+      <HBox alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="40.0" prefWidth="686.0" spacing="20.0" VBox.vgrow="NEVER">
+         <children>
+            <Label fx:id="titleOfPage" text="Bienvenue" HBox.hgrow="ALWAYS">
+                <styleClass>
+                    <String fx:value="titleOfPage"/>
+                </styleClass>
+            </Label>
+             <Label fx:id="titleUserName" HBox.hgrow="ALWAYS">
+                 <styleClass>
+                     <String fx:value="titleUserName"/>
+                 </styleClass>
+             </Label>
+            <Button id="logOutButton" alignment="CENTER" contentDisplay="CENTER" minHeight="44.0" mnemonicParsing="false" onAction="#onLogoutButtonClicked" prefHeight="44.0" prefWidth="151.0" text="Se déconnecter" HBox.hgrow="ALWAYS" />
+         </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+      </HBox>
+      <Label fx:id="mainPageErrorLabel" alignment="CENTER" contentDisplay="CENTER" maxWidth="1.7976931348623157E308" prefHeight="18.0" prefWidth="0.0" textAlignment="CENTER" textFill="RED" />
+      <Accordion VBox.vgrow="NEVER">
+        <panes>
+          <TitledPane animated="false" text="Nom">
+               <content>
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" text="Nom recherché :" />
+                        <TextField fx:id="searchFilterNameField" prefHeight="25.0" prefWidth="120.0" />
+                        <Button id="searchFilterNameButton" mnemonicParsing="false" onAction="#onSearchLastNameButton" text="Rechercher" />
+                     </children>
+                  </HBox>
+               </content>
+          </TitledPane>
+            <TitledPane animated="false" text="Prénom">
+               <content>
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" text="Prénom recherché :" />
+                        <TextField fx:id="searchFilterFirstNameField" prefHeight="25.0" prefWidth="120.0" />
+                        <Button id="searchFilterFirstNameButton" mnemonicParsing="false" onAction="#onSearchFirstNameButton" text="Rechercher" />
+                     </children>
+                  </HBox>
+               </content>
+            </TitledPane>
+          <TitledPane animated="false" text="Notes">
+               <content>
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" text="Note minimum :" />
+                        <TextField fx:id="searchFilterMinGradeField" prefHeight="25.0" prefWidth="65.0" />
+                        <Label alignment="CENTER" prefHeight="25.0" text="Note maximum :" />
+                        <TextField fx:id="searchFilterMaxGradeField" prefHeight="25.0" prefWidth="65.0" />
+                        <Button id="searchFilterGradeButton" mnemonicParsing="false" onAction="#onSearchGradeButton" text="Appliquer" />
+                     </children>
+                  </HBox>
+               </content>
+          </TitledPane>
+          <TitledPane animated="false" text="Âge">
+               <content>
+                  <HBox alignment="CENTER" prefHeight="25.0" prefWidth="200.0" spacing="15.0">
+                     <children>
+                        <Label alignment="CENTER" prefHeight="25.0" text="Âge minimum :" />
+                        <TextField fx:id="searchFilterMinAgeField" prefHeight="25.0" prefWidth="65.0" />
+                        <Label alignment="CENTER" prefHeight="25.0" text="Âge maximum :" />
+                        <TextField fx:id="searchFilterMaxAgeField" prefHeight="25.0" prefWidth="65.0" />
+                        <Button id="searchFilterAgeButton" mnemonicParsing="false" onAction="#onSearchAgeButton" text="Appliquer" />
+                     </children>
+                  </HBox>
+               </content>
+          </TitledPane>
+        </panes>
+      </Accordion>
+      <HBox alignment="CENTER" prefHeight="314.0" prefWidth="646.0" spacing="10.0" VBox.vgrow="ALWAYS">
+         <children>
+            <VBox alignment="CENTER" prefHeight="272.0" prefWidth="565.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <TableView fx:id="studentsTable" onMouseClicked="#onTableClicked" VBox.vgrow="ALWAYS">
+                    <columns>
+                        <TableColumn fx:id="dataTableStudentID" prefWidth="48.799983978271484" text="# ID" />
+                        <TableColumn fx:id="dataTableStudentLastName" prefWidth="101.60000610351562" text="Nom" />
+                        <TableColumn fx:id="dataTableStudentFirstName" prefWidth="104.00001525878906" text="Prénom" />
+                        <TableColumn fx:id="dataTableStudentAge" prefWidth="58.39996337890625" text="Âge" />
+                        <TableColumn fx:id="dataTableStudentGrade" prefWidth="85.5999755859375" text="Moyenne" />
+                    </columns>
+                     <columnResizePolicy>
+                        <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                     </columnResizePolicy>
+                  </TableView>
+               </children>
+            </VBox>
+            <VBox minWidth="85.0" spacing="10.0" HBox.hgrow="NEVER">
+               <children>
+                  <Button onAction="#openGraphButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Graphiques" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+                  <Button onAction="#exportTableDataButton" id="exportSearchButton" mnemonicParsing="false" prefHeight="100.0" prefWidth="100.0" text="Exporter les résultats" textAlignment="CENTER" wrapText="true" VBox.vgrow="ALWAYS" />
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+      <GridPane alignment="CENTER" hgap="6.0" minHeight="-Infinity" minWidth="-Infinity" prefHeight="65.0" vgap="2.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label alignment="CENTER" prefHeight="25.0" text="Nom :" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="enterStudentLastName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="25.0" text="Prénom :" GridPane.columnIndex="1" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="enterStudentFirstName" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="25.0" text="Âge :" GridPane.columnIndex="2" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="enterStudentAge" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+            <Label alignment="CENTER" prefHeight="25.0" text="Moyenne :" GridPane.columnIndex="3" GridPane.halignment="CENTER" GridPane.valignment="BOTTOM" />
+            <TextField fx:id="enterStudentGrade" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="25.0" prefWidth="65.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#addStudentSelection" text="+ Ajouter" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button alignment="CENTER" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#updateStudentSelection" text="/ Modifier" GridPane.columnIndex="4" GridPane.halignment="CENTER" GridPane.rowIndex="1" GridPane.valignment="CENTER" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#deleteStudentSelection" text="- Supprimer" GridPane.columnIndex="5" GridPane.halignment="CENTER" GridPane.valignment="CENTER" />
+            <Button maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" mnemonicParsing="false" onAction="#clearStudentSelection" text="Désélectionner" GridPane.columnIndex="4" />
+         </children>
+      </GridPane>
+   </children>
+   <padding>
+      <Insets bottom="15.0" left="10.0" right="10.0" top="15.0" />
+   </padding>
+</VBox>

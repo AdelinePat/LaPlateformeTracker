@@ -1,5 +1,7 @@
 # 📚 La Plateforme Tracker
+![Plateforme Tracker - Dashboard](./src/main/resources/plateforme-tracker.png)
 La Plateforme Tracker is a Java-based school project designed to manage and visualize student data stored in a PostgreSQL database. The application offers full CRUD functionality, filterable views, and graphical data representation using JavaFX.
+
 ## 🛠 Features
 ### - 🎓 **Student Management (CRUD)**
   - Add, update, delete, and list students, each with:
